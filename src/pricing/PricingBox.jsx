@@ -1,5 +1,5 @@
 import React from "react";
-import Box from "./Box.jsx";
+import Box from "../pricing/Box";
 
 const PricingBox = () => {
   const featureBox1 = [
