@@ -16,13 +16,25 @@ body {
     z-index: 1;
     background: #FFFFFF;
     border-radius: 10px;
-    max-width: 360px;
+    width: 100%;
     margin: 0 auto 100px;
-    padding: 45px;
+    /* padding: 45px; */
     text-align: center;
 }
 
 .form input {
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    border-radius: 5px;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    font-family: 'Comfortaa', cursive;
+}
+.form-control.input_select {
     outline: 0;
     background: #f2f2f2;
     width: 100%;
@@ -71,7 +83,4 @@ body {
     text-align: left;
     font-size: 10px;
     color: red;
-}
-button{
-text-decoration: none;
 }
