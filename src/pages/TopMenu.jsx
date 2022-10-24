@@ -2,6 +2,7 @@ import { Button } from "@mui/material";
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import logo from "../assets/images/logoHIKKOSHI.png"
+import "../assets/css/button.css";
 
 const TopMenu = () => {
   return (
@@ -12,25 +13,25 @@ const TopMenu = () => {
         <a href="/"><img style={{width: '30%', cursor: 'pointer', marginLeft: '100px'}}  src={logo} alt="Relocation service" /></a>
       </h5>
       
-      <nav className="my-2 my-md-0 mr-md-3">
+      <nav className="my-2 my-md-0 mr-md-3 btn-menu">
 
         <NavLink to={"/"}>
-          <Button> Home </Button>
+          <Button className="btn-menu"> Home </Button>
         </NavLink>
 
         <NavLink to={"/register"}>
-          <Button> Book Services </Button>
+          <Button className="btn-menu"> Book Services </Button>
         </NavLink>
 
         <NavLink >
-          <Button>  Contact </Button>
+          <Button className="btn-menu">  Contact </Button>
         </NavLink>
         <NavLink to={'/service'}>
-          <Button>  service </Button>
+          <Button className="btn-menu">  service </Button>
         </NavLink>
 
         <NavLink to={"/sign-in"}>
-          <Button> Sign in </Button>
+          <Button className="btn-menu"> Sign in </Button>
         </NavLink>
 
       </nav>
