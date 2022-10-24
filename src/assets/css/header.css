@@ -1,0 +1,24 @@
+.btn-service {
+    display: flex;
+    width: 139%;
+    margin-left: -131px;
+    margin-top: -7px;
+    margin-bottom: 100px;
+    
+}
+
+.csize {
+    height: 48px !important;
+    margin-top: 8px;
+    background-color: lavender;
+}
+.cborder {
+    border-radius: 0 !important;
+}
+.ccolor {
+    background-color: rgb(222, 232, 226);
+}
+.title-content {
+    z-index: 2;
+}
+

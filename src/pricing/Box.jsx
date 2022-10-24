@@ -1,4 +1,6 @@
 import React from "react";
+import {BsCheckCircle} from "react-icons/bs";
+import { IoLogoYen } from "react-icons/io"
 
 const Box = (props) => {
   const { title, btnClass, btnTitle, price, feature } = props;
@@ -9,12 +11,14 @@ const Box = (props) => {
       </div>
       <div className="card-body">
         <h1 className="card-title pricing-card-title">
-          ${price} <small className="text-muted">/ mo</small>
+          <IoLogoYen/>{price} <small className="text-muted"></small>
         </h1>
-        <ul className="list-unstyled mt-3 mb-4">
+        <ul className="list-unstyled mt-3 mb-4 service-content">
           {feature &&
             feature.map((data, index) => {
-              return <li key={index}>{data}</li>;
+              
+              return <li key={index}><BsCheckCircle/>&nbsp;&nbsp;{data}</li>;
+              // return <li key={index}>{data}</li>;
             })}
         </ul>
         <button type="button" className={`btn btn-lg btn-block ${btnClass}`}>

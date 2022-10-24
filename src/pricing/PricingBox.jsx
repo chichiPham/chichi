@@ -1,47 +1,52 @@
 import React from "react";
-import Box from "../pricing/Box";
+import Box from "./Box.jsx";
+
 
 const PricingBox = () => {
   const featureBox1 = [
-    "10 users included",
-    "2 GB of storage",
-    "Email support",
-    "Help center access"
+    "Gợi ý lịch chuyển nhà",
+    "Các thủ tục hành chính",
+    "Đề xuất nhà miễn phí",
+    "Theo dõi hoạt động hiện tại",
   ];
   const featureBox2 = [
-    "20 users included",
-    "10 GB of storage",
-    "Priority email support",
-    "Help center access"
+    "Tự động xuất các giấy tờ cần thiết cho việc chuyển nhà",
+    "Đề xuất các dịch vụ chuyển nhà phù hợp",
+    "Gợi ý lịch trình chuyển nhà",
+    "Các thủ tục hành chính",
+    "Đề xuất nhà miễn phí",
+    "Theo dõi hoạt động hiện tại",
+    "Nhận email thông báo"
   ];
   const featureBox3 = [
-    "30 users included",
-    "15 GB of storage",
-    "Phone and email support",
-    "Help center access"
+    "Ủy quyền và chúng tôi thực hiện thay cho bạn",
+    "Tư vấn online đến khi thuê được nhà vừa ý",
+    "Tư vấn và đăng ký dịch vụ chuyển đồ vừa ý",
+    "Theo dõi tất cả các hoạt động trực tuyến",
+    "Các yêu cầu khác nếu có"
   ];
   return (
     <div className="card-deck mb-3 text-center">
       <Box
-        price="0"
-        title="Free"
+        price="1000"
+        title="Tiết kiệm"
         btnClass="btn-outline-primary"
-        btnTitle="Sign up for free"
+        btnTitle="ĐĂNG KÝ"
         feature={featureBox1}
       />
       <Box
-        feature={featureBox2}
-        price="15"
-        title="Pro"
+        price="1500"
+        title="Hợp lý"
         btnClass="btn-primary"
-        btnTitle="Get started"
+        btnTitle="CHUYỂN NGAY"
+        feature={featureBox2}
       />
       <Box
+        price="100.000"
+        title="Rảnh khỏe"
+        btnClass="btn-outline-primary"
+        btnTitle="NHẬN TƯ VẤN NGAY"
         feature={featureBox3}
-        price="29"
-        title="Enterprise"
-        btnClass="btn-primary"
-        btnTitle="Contact us"
       />
     </div>
   );

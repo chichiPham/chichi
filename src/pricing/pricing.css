@@ -18,3 +18,9 @@ html {
 .card-deck .card {
   min-width: 220px;
 }
+.service-content {
+  text-align: left !important;
+  line-height: 2;
+}
+
+
