@@ -72,7 +72,7 @@ function RegisterForm() {
                     handleBlur,
                     handleSubmit,
                 }) => (
-                    <div className="login">
+                    <div className="register">
                         <div className="form">
                             {/* Passing handleSubmit parameter tohtml form onSubmit property */}
                             <form noValidate onSubmit={handleSubmit}>

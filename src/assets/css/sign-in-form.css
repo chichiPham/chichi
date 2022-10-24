@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa&display=swap");
 
 body {
     background: white;
@@ -8,13 +8,20 @@ body {
     width: 360px;
     padding: 8% 0 0;
     margin: auto;
-    font-family: 'Comfortaa', cursive;
+    font-family: "Comfortaa", cursive;
+}
+
+.register {
+    width: 360px;
+    /* padding: 8% 0 0; */
+    margin: auto;
+    font-family: "Comfortaa", cursive;
 }
 
 .form {
     position: relative;
     z-index: 1;
-    background: #FFFFFF;
+    background: #ffffff;
     border-radius: 10px;
     width: 100%;
     margin: 0 auto 100px;
@@ -32,7 +39,7 @@ body {
     padding: 15px;
     box-sizing: border-box;
     font-size: 14px;
-    font-family: 'Comfortaa', cursive;
+    font-family: "Comfortaa", cursive;
 }
 .form-control.input_select {
     outline: 0;
@@ -41,10 +48,9 @@ body {
     border: 0;
     border-radius: 5px;
     margin: 0 0 15px;
-    padding: 15px;
     box-sizing: border-box;
     font-size: 14px;
-    font-family: 'Comfortaa', cursive;
+    font-family: "Comfortaa", cursive;
 }
 
 .form input:focus {
@@ -52,7 +58,7 @@ body {
 }
 
 .form button {
-    font-family: 'Comfortaa', cursive;
+    font-family: "Comfortaa", cursive;
     text-transform: uppercase;
     outline: 0;
     background: #4b6cb7;
@@ -60,7 +66,7 @@ body {
     border: 0;
     border-radius: 5px;
     padding: 15px;
-    color: #FFFFFF;
+    color: #ffffff;
     font-size: 14px;
     -webkit-transition: all 0.3 ease;
     transition: all 0.3 ease;
