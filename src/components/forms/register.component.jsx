@@ -1,9 +1,9 @@
 import { Formik } from "formik";
-import React from 'react';
 import * as Yup from "yup";
 import "../../assets/css/sign-in-form.css";
 import CheckboxLabels from './CheckBoxLabels';
 import BasicSelect from './selectAddress';
+import React from "react";
 // Creating schema
 const schema = Yup.object().shape({
 

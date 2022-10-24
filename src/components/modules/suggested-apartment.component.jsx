@@ -1,5 +1,6 @@
-import {Fragment} from "react";
-import {Grid} from "@mui/material";
+import React from "react";
+import { Fragment } from "react";
+import { Grid } from "@mui/material";
 import ApartmentCard from "./cards/apartment-card.component";
 
 const SuggestedApartment = () => {

@@ -1,4 +1,4 @@
-import {Fragment} from "react";
+import {Fragment,React} from "react";
 import DataTable from "../../components/table/data-table.component";
 import SuggestedApartment from "../../components/modules/suggested-apartment.component";
 import SuggestedMovingService from "../../components/modules/suggested-moving-service.component";

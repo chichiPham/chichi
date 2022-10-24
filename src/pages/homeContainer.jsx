@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from '../Header';
 import PricingBox from '../pricing/PricingBox';
 import Footer from './Footer';
+import Header from './Header';
 
 const HomeContainer = () => {
     return (

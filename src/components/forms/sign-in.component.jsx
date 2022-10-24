@@ -2,7 +2,7 @@ import "../../assets/css/sign-in-form.css";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import CheckboxLabels from "./CheckBoxLabels";
-
+import React from "react";
 // Creating schema
 const schema = Yup.object().shape({
     email: Yup.string()
