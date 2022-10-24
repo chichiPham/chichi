@@ -8,6 +8,7 @@
     "bootstrap": "4.5.3",
     "react": "17.0.0",
     "react-dom": "17.0.0",
+    "react-icons": "^4.6.0",
     "react-scripts": "3.4.3"
   },
   "devDependencies": {
@@ -18,8 +19,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
-  ,
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
