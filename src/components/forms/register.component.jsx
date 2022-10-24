@@ -1,12 +1,9 @@
-import React from 'react';
-import "../../assets/css/sign-in-form.css";
 import { Formik } from "formik";
+import React from 'react';
 import * as Yup from "yup";
-import BasicSelect from './selectAddress'
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
+import "../../assets/css/sign-in-form.css";
 import CheckboxLabels from './CheckBoxLabels';
+import BasicSelect from './selectAddress';
 // Creating schema
 const schema = Yup.object().shape({
 
@@ -75,7 +72,7 @@ function RegisterForm() {
                     handleBlur,
                     handleSubmit,
                 }) => (
-                    <div className="login">
+                    <div className="register">
                         <div className="form">
                             {/* Passing handleSubmit parameter tohtml form onSubmit property */}
                             <form noValidate onSubmit={handleSubmit}>

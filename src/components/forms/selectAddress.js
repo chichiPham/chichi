@@ -1,5 +1,5 @@
 import React from 'react';
-import { city } from '../DataFill/data';
+import { city } from '../../dataFill/data';
 
 const BasicSelect = (props) => {
     console.log(city);
