@@ -4,6 +4,11 @@ import "../../assets/css/sign-in-form.css";
 import CheckboxLabels from './CheckBoxLabels';
 import BasicSelect from './selectAddress';
 import React from "react";
+import ExampleDate from "../date_picker/date-picker.js";
+import "../../assets/css/register.component.css";
+import { pricingServiceData } from '../../dataFill/data';
+import { city } from '../../dataFill/data';
+
 // Creating schema
 const schema = Yup.object().shape({
 
@@ -37,9 +42,9 @@ const schema = Yup.object().shape({
     newAddress: Yup.string()
         .required('Required'),
 
-    moveDate: Yup.string()
-        .min(3, 'Minimum 3 characters')
-        .max(15, 'Maximum 15 characters')
+    moveDate: Yup.date().nullable()
+        // .min(3, 'Minimum 3 characters')
+        // .max(15, 'Maximum 15 characters')
         .required('Required'),
 });
 
@@ -56,8 +61,9 @@ function RegisterForm() {
                     mobile: '',
                     plan: '',
                     currentAddress: '',
-                    // newAddress: '',
-                    moveDate: ''
+                    newAddress: '',
+                    // moveDate: ''
+                    moveDate: new Date()
                 }}
                 onSubmit={(values) => {
                     // Alert the input values of the form that we filled
@@ -71,6 +77,7 @@ function RegisterForm() {
                     handleChange,
                     handleBlur,
                     handleSubmit,
+                    setFieldValue
                 }) => (
                     <div className="register">
                         <div className="form">
@@ -131,11 +138,12 @@ function RegisterForm() {
                                     className="form-control inp_number"
                                     id='mobile'
                                 />
+                                
                                 {/* If validation is not passed show errors */}
                                 <p className="error">
                                     {errors.mobile && touched.mobile && errors.mobile}
                                 </p>
-                                <input
+                                {/* <input
                                     type="plan"
                                     name="plan"
                                     onChange={handleChange}
@@ -144,7 +152,19 @@ function RegisterForm() {
                                     placeholder="Enter your plan"
                                     className="form-control inp_text"
                                     id="plan"
+                                /> */}
+                                <BasicSelect
+                                    type="plan"
+                                    name="plan"
+                                    selectData={pricingServiceData}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    value={values.plan}
+                                    placeholder="Enter your Package"
+                                    className="form-control input_select"
+                                    id="plan"
                                 />
+
                                 {/* If validation is not passed show errors */}
                                 <p className="error">
                                     {errors.plan && touched.plan && errors.plan}
@@ -153,6 +173,7 @@ function RegisterForm() {
                                 <BasicSelect
                                     type="currentAddress"
                                     name="currentAddress"
+                                    selectData={city}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.currentAddress}
@@ -168,6 +189,7 @@ function RegisterForm() {
 
                                     type="newAddress"
                                     name="newAddress"
+                                    selectData={city}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.newAddress}
@@ -178,7 +200,7 @@ function RegisterForm() {
                                 <p className="error">
                                     {errors.newAddress && touched.newAddress && errors.newAddress}
                                 </p>
-                                <input
+                                {/* <input
                                     type="moveDate"
                                     name="moveDate"
                                     onChange={handleChange}
@@ -187,11 +209,27 @@ function RegisterForm() {
                                     placeholder="Enter your move Date"
                                     className="form-control inp_text"
                                     id="moveDate"
+                                /> */}
+                                
+                                <ExampleDate
+                                    type="moveDate"
+                                    name="moveDate"
+                                    onChangeDate={setFieldValue}
+                                    onBlur={handleBlur}
+                                    value={values.moveDate}
+                                    placeholder="Enter your move Date"
+                                    className="form-control inp_text"
+                                    id="moveDate"
+                                    // value={formik.values.moveDate}
+                                    // onChange={(value) => {
+                                    //         formik.setFieldValue('moveDate', Date.parse(value));
+                                    //         }}
                                 />
+                                
                                 {/* If validation is not passed show errors */}
-                                <p className="error">
+                                {/* <p className="error">
                                     {errors.moveDate && touched.moveDate && errors.moveDate}
-                                </p>
+                                </p> */}
                                 <CheckboxLabels label='Suggested Apartment '/>
                                 
                                 {/* Click on submit button to submit the form */}
@@ -201,6 +239,7 @@ function RegisterForm() {
                     </div>
                 )}
             </Formik>
+            
         </>
     );
 }

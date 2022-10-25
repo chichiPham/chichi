@@ -1,4 +1,8 @@
-
+const pricingServiceData = [
+    'Tiết kiệm',
+    'Hợp lý',
+    'Rảnh khỏe'
+]
 const pricingA = {
 
     name: 'Gói Tiết Kiệm',
@@ -90,4 +94,4 @@ const city = [
     '47	沖縄県	Okinawa'
 ]
 const city2=['okinawa','tokyo']
-export { pricingA, pricingB, pricingC, city, city2 }
+export { pricingA, pricingB, pricingC, city, city2, pricingServiceData }

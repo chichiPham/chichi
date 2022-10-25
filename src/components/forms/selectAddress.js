@@ -1,8 +1,7 @@
 import React from 'react';
-import { city } from '../../dataFill/data';
 
 const BasicSelect = (props) => {
-    console.log(city);
+    // console.log(city);
     const [value, setValue] = React.useState('');
 
     const handleChange = (event) => {
@@ -19,7 +18,7 @@ const BasicSelect = (props) => {
                 className={props.className}
             >
                 <option >{props.placeholder}</option>
-                {city.map((item, index) =>
+                {props.selectData.map((item, index) =>
                     <option key={index} value={item} >{item} </option>)}
 
 

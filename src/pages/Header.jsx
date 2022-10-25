@@ -1,6 +1,8 @@
 import React from "react";
 import anh1 from "../assets/images/HIKKOSHI01.png";
 import "../assets/css/header.css";
+import LocalizedDatePicker from "../components/date_picker/date-picker";
+
 
 const Header = (props) => {
   const { title, description } = props;
@@ -18,6 +20,7 @@ const Header = (props) => {
           <p className="lead">{description}</p>
         </div>
       </div>
+      {/* <LocalizedDatePicker/> */}
     </>
     
   );
