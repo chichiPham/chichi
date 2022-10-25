@@ -1,7 +1,7 @@
 import React from 'react';
 
 const BasicSelect = (props) => {
-    // console.log(city);
+
     const [value, setValue] = React.useState('');
 
     const handleChange = (event) => {

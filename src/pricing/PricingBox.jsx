@@ -1,4 +1,7 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setPackage } from "../store/package/packageSlice.js";
 import Box from "./Box.jsx";
 
 
@@ -25,6 +28,14 @@ const PricingBox = () => {
     "Theo dõi tất cả các hoạt động trực tuyến",
     "Các yêu cầu khác nếu có"
   ];
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const handleClickPackage=(packageName)=>{
+    console.log({packageName});
+    dispatch(setPackage(packageName))
+    navigate('/register')
+  }
   return (
     <div className="card-deck mb-3 text-center">
       <Box
@@ -33,6 +44,7 @@ const PricingBox = () => {
         btnClass="btn-outline-primary"
         btnTitle="ĐĂNG KÝ"
         feature={featureBox1}
+        handleClickPackage={handleClickPackage}
       />
       <Box
         price="1500"
@@ -40,6 +52,7 @@ const PricingBox = () => {
         btnClass="btn-primary"
         btnTitle="CHUYỂN NGAY"
         feature={featureBox2}
+        handleClickPackage={handleClickPackage}
       />
       <Box
         price="100.000"
@@ -47,6 +60,7 @@ const PricingBox = () => {
         btnClass="btn-outline-primary"
         btnTitle="NHẬN TƯ VẤN NGAY"
         feature={featureBox3}
+        handleClickPackage={handleClickPackage}
       />
     </div>
   );

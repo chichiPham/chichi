@@ -3,6 +3,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import CheckboxLabels from "./CheckBoxLabels";
 import React from "react";
+import { Checkbox } from "./customCheckBox";
 // Creating schema
 const schema = Yup.object().shape({
     email: Yup.string()
@@ -67,7 +68,7 @@ function SignInForm() {
                                 <p className="error">
                                     {errors.password && touched.password && errors.password}
                                 </p>
-                                <CheckboxLabels label='Remember Me'/>
+                                <Checkbox name='Remember Me'/>
                                 {/* Click on submit button to submit the form */}
                                 <button type="submit">Login</button>
                             </form>

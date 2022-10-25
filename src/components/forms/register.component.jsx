@@ -1,13 +1,17 @@
-import { Formik } from "formik";
+import { Formik ,Field} from "formik";
 import * as Yup from "yup";
 import "../../assets/css/sign-in-form.css";
 import CheckboxLabels from './CheckBoxLabels';
 import BasicSelect from './selectAddress';
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ExampleDate from "../date_picker/date-picker.js";
 import "../../assets/css/register.component.css";
 import { pricingServiceData } from '../../dataFill/data';
 import { city } from '../../dataFill/data';
+import { useDispatch, useSelector } from "react-redux";
+import { current } from "@reduxjs/toolkit";
+import { resetPackage } from "../../store/package/packageSlice";
+import { Checkbox } from "./customCheckBox";
 
 // Creating schema
 const schema = Yup.object().shape({
@@ -49,6 +53,9 @@ const schema = Yup.object().shape({
 });
 
 function RegisterForm() {
+    const dispatch = useDispatch();
+    const currentPackage = useSelector(state => state.package.currentPackage);
+
     return (
         <>
             {/* Wrapping form inside formik tag and passing our schema to validationSchema prop */}
@@ -59,15 +66,19 @@ function RegisterForm() {
                     password: '',
                     name: '',
                     mobile: '',
-                    plan: '',
+                    plan: currentPackage,
                     currentAddress: '',
                     newAddress: '',
                     // moveDate: ''
-                    moveDate: new Date()
+                    moveDate: new Date(),
+                    isSuggested: false,
+
                 }}
                 onSubmit={(values) => {
                     // Alert the input values of the form that we filled
+                    dispatch(resetPackage());
                     alert(JSON.stringify(values));
+
                 }}
             >
                 {({
@@ -83,7 +94,7 @@ function RegisterForm() {
                         <div className="form">
                             {/* Passing handleSubmit parameter tohtml form onSubmit property */}
                             <form noValidate onSubmit={handleSubmit}>
-                                <span style={{fontSize:'40px'}}>Register</span>
+                                <span style={{ fontSize: '40px' }}>Register</span>
                                 {/* Our input html with passing formik parameters like handleChange, values, handleBlur to input properties */}
                                 <input
                                     type="email"
@@ -138,7 +149,7 @@ function RegisterForm() {
                                     className="form-control inp_number"
                                     id='mobile'
                                 />
-                                
+
                                 {/* If validation is not passed show errors */}
                                 <p className="error">
                                     {errors.mobile && touched.mobile && errors.mobile}
@@ -160,7 +171,7 @@ function RegisterForm() {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.plan}
-                                    placeholder="Enter your Package"
+                                    placeholder={currentPackage ? currentPackage : 'Select your favorites package'}
                                     className="form-control input_select"
                                     id="plan"
                                 />
@@ -177,7 +188,7 @@ function RegisterForm() {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.currentAddress}
-                                    placeholder="Enter your current Address"
+                                    placeholder="Select your current Address"
                                     className="form-control input_select"
                                     id="currentAddress"
                                 />
@@ -193,7 +204,7 @@ function RegisterForm() {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.newAddress}
-                                    placeholder="Enter your new Address"
+                                    placeholder="Select your New Address"
                                     className="form-control input_select"
                                     id="newAddress"
                                 />
@@ -210,7 +221,7 @@ function RegisterForm() {
                                     className="form-control inp_text"
                                     id="moveDate"
                                 /> */}
-                                
+
                                 <ExampleDate
                                     type="moveDate"
                                     name="moveDate"
@@ -220,18 +231,19 @@ function RegisterForm() {
                                     placeholder="Enter your move Date"
                                     className="form-control inp_text"
                                     id="moveDate"
-                                    // value={formik.values.moveDate}
-                                    // onChange={(value) => {
-                                    //         formik.setFieldValue('moveDate', Date.parse(value));
-                                    //         }}
+                                // value={formik.values.moveDate}
+                                // onChange={(value) => {
+                                //         formik.setFieldValue('moveDate', Date.parse(value));
+                                //         }}
                                 />
-                                
+
                                 {/* If validation is not passed show errors */}
                                 {/* <p className="error">
                                     {errors.moveDate && touched.moveDate && errors.moveDate}
                                 </p> */}
-                                <CheckboxLabels label='Suggested Apartment '/>
-                                
+
+                               <Checkbox name='Suggested Apartment'/>
+
                                 {/* Click on submit button to submit the form */}
                                 <button type="submit">Register</button>
                             </form>
@@ -239,7 +251,7 @@ function RegisterForm() {
                     </div>
                 )}
             </Formik>
-            
+
         </>
     );
 }

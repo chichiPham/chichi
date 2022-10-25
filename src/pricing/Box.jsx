@@ -1,9 +1,10 @@
 import React from "react";
 import { BiYen } from "react-icons/bi"
-import {BsCheckCircle} from "react-icons/bs";
+import { BsCheckCircle } from "react-icons/bs";
 
 const Box = (props) => {
-  const { title, btnClass, btnTitle, price, feature } = props;
+  const { title, btnClass, btnTitle, price, feature, handleClickPackage } = props;
+
   return (
     <div className="card mb-4 shadow-sm">
       <div className="card-header">
@@ -11,21 +12,23 @@ const Box = (props) => {
       </div>
       <div className="card-body">
         <h1 className="card-title pricing-card-title">
-        <BiYen style={{marginTop: '-8px'}}/>{price} <small className="text-muted"></small>
+          <BiYen style={{ marginTop: '-8px' }} />{price} <small className="text-muted"></small>
         </h1>
         <ul className="list-unstyled mt-3 mb-4 service-content">
           {feature &&
             feature.map((data, index) => {
-              
-              return <li key={index}><BsCheckCircle style={{color: 'rgb(17 184 56)'}}/>&nbsp;&nbsp;{data}</li>;
+
+              return <li key={index}><BsCheckCircle style={{ color: 'rgb(17 184 56)' }} />&nbsp;&nbsp;{data}</li>;
               // return <li key={index}>{data}</li>;
             })}
         </ul>
-       
+
       </div>
-      <button type="button" className={`btn btn-lg btn-block ${btnClass}`}>
-          {btnTitle}
-        </button>
+      <button
+        onClick={() => handleClickPackage(title)}
+        type="button" className={`btn btn-lg btn-block ${btnClass}`}>
+        {btnTitle}
+      </button>
     </div>
   );
 };
