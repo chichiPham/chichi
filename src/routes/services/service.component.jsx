@@ -7,8 +7,9 @@ import SuggestedMovingService from "../../components/modules/suggested-moving-se
 const Service = () => {
     return (
         <Fragment>
-            <DataTable />
-            <SuggestedApartment />
+          
+            <DataTable /> 
+             <SuggestedApartment />
             <SuggestedMovingService />
         </Fragment>
     )

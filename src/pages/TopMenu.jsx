@@ -13,7 +13,7 @@ const TopMenu = () => {
         <a href="/"><img style={{width: '30%', cursor: 'pointer', marginLeft: '100px'}}  src={logo} alt="Relocation service" /></a>
       </h5>
       
-      <nav className="my-2 my-md-0 mr-md-3">
+      <nav className="my-2 my-md-0 mr-md-3 btn-menu">
 
         <NavLink to={"/"}>
           <Button className="btn-menu"> Home </Button>

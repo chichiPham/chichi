@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 
 
 import "react-datepicker/dist/react-datepicker.css";
+
 // import { registerLocale, setDefaultLocale } from  "react-datepicker";
 // import es from 'date-fns/locale/es';
 // registerLocale('es', es)
@@ -23,6 +24,7 @@ const ExampleDate = (props) => {
   const [startDate, setStartDate] = useState(null);
   return (
     <DatePicker
+        // selected={startDate}
         // onChange={(date) => setStartDate(date)} 
         selected={ startDate }
         onChange={ handleStartDateChange }

@@ -1,18 +1,4 @@
-/* .btn-menu:hover {
-    color: black;
-} */
-.btn-menu {
-    height: 32px;
-    padding: 0 15px;
-    font-size: 14px;
-    color: #007bff;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: all 0.2s ease-in-out;
-}
-
 .btn-menu:hover {
-    box-shadow: 1px 1px #007bff, 2px 2px #007bff, 3px 3px #007bff;
-    transform: translateX(-3px);
-
+    color: black;
+    zoom: 1.2;
 }

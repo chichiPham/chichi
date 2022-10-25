@@ -10,13 +10,13 @@
 .csize {
     height: 48px !important;
     margin-top: 8px;
-    /* background-color: lavender; */
+    background-color: lavender;
 }
 .cborder {
     border-radius: 0 !important;
 }
 .ccolor {
-    /* background-color: rgb(222, 232, 226); */
+    background-color: rgb(222, 232, 226);
 }
 .title-content {
     z-index: 2;
