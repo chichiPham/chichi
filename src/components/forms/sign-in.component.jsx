@@ -3,7 +3,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import CheckboxLabels from "./CheckBoxLabels";
 import React from "react";
-import { Checkbox } from "./customCheckBox";
+import { Checkbox, FormControlLabel } from "@mui/material";
 // Creating schema
 const schema = Yup.object().shape({
     email: Yup.string()
@@ -20,25 +20,26 @@ function SignInForm() {
             {/* Wrapping form inside formik tag and passing our schema to validationSchema prop */}
             <Formik
                 validationSchema={schema}
-                initialValues={{ email: "", password: "" }}
+                initialValues={{ email: "", password: "", rememberMe: false }}
                 onSubmit={(values) => {
                     // Alert the input values of the form that we filled
                     alert(JSON.stringify(values));
                 }}
             >
                 {({
-                      values,
-                      errors,
-                      touched,
-                      handleChange,
-                      handleBlur,
-                      handleSubmit,
-                  }) => (
+                    values,
+                    errors,
+                    touched,
+                    handleChange,
+                    handleBlur,
+                    handleSubmit,
+                    setFieldValue
+                }) => (
                     <div className="login">
                         <div className="form">
                             {/* Passing handleSubmit parameter tohtml form onSubmit property */}
                             <form noValidate onSubmit={handleSubmit}>
-                                <span style={{fontSize:'40px'}}>Login</span>
+                                <span style={{ fontSize: '40px' }}>Login</span>
                                 {/* Our input html with passing formik parameters like handleChange, values, handleBlur to input properties */}
                                 <input
                                     type="email"
@@ -68,7 +69,19 @@ function SignInForm() {
                                 <p className="error">
                                     {errors.password && touched.password && errors.password}
                                 </p>
-                                <Checkbox name='Remember Me'/>
+                                <CheckboxLabels 
+                                label='Remember Me'
+                                name= 'rememberMe'
+                                checked={values.rememberMe}
+                                onChange={setFieldValue}
+
+                                />
+                                {/* <FormControlLabel
+                                    control={<Checkbox checked={values.rememberMe} />}
+                                    label='Remember Me'
+                                    name="rememberMe"
+                                    onChange={handleChange}
+                                /> */}
                                 {/* Click on submit button to submit the form */}
                                 <button type="submit">Login</button>
                             </form>

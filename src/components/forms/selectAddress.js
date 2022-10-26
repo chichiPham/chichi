@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 const BasicSelect = (props) => {
 
     const [value, setValue] = React.useState('');
@@ -18,7 +19,7 @@ const BasicSelect = (props) => {
                 className={props.className}
             >
                 <option >{props.placeholder}</option>
-                {props.selectData.map((item, index) =>
+                {props.data.map((item, index) =>
                     <option key={index} value={item} >{item} </option>)}
 
 

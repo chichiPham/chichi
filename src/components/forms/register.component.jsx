@@ -1,17 +1,14 @@
-import { Formik ,Field} from "formik";
+import { Formik } from "formik";
 import * as Yup from "yup";
 import "../../assets/css/sign-in-form.css";
 import CheckboxLabels from './CheckBoxLabels';
 import BasicSelect from './selectAddress';
-import React, { useEffect, useState } from "react";
-import ExampleDate from "../date_picker/date-picker.js";
-import "../../assets/css/register.component.css";
-import { pricingServiceData } from '../../dataFill/data';
-import { city } from '../../dataFill/data';
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { current } from "@reduxjs/toolkit";
 import { resetPackage } from "../../store/package/packageSlice";
-import { Checkbox } from "./customCheckBox";
+import { city, pricingServiceData } from "../../dataFill/data";
+import ExampleDate from "../date_picker/date-picker";
+
 
 // Creating schema
 const schema = Yup.object().shape({
@@ -46,16 +43,15 @@ const schema = Yup.object().shape({
     newAddress: Yup.string()
         .required('Required'),
 
-    moveDate: Yup.date().nullable()
-        // .min(3, 'Minimum 3 characters')
-        // .max(15, 'Maximum 15 characters')
+    moveDate: Yup.string()
+        .min(3, 'Minimum 3 characters')
+        .max(15, 'Maximum 15 characters')
         .required('Required'),
 });
 
 function RegisterForm() {
-    const dispatch = useDispatch();
     const currentPackage = useSelector(state => state.package.currentPackage);
-
+    const dispatch = useDispatch();
     return (
         <>
             {/* Wrapping form inside formik tag and passing our schema to validationSchema prop */}
@@ -69,16 +65,13 @@ function RegisterForm() {
                     plan: currentPackage,
                     currentAddress: '',
                     newAddress: '',
-                    // moveDate: ''
-                    moveDate: new Date(),
-                    isSuggested: false,
-
+                    moveDate: '',
+                    isSuggestedApartment: true
                 }}
                 onSubmit={(values) => {
                     // Alert the input values of the form that we filled
                     dispatch(resetPackage());
                     alert(JSON.stringify(values));
-
                 }}
             >
                 {({
@@ -149,7 +142,6 @@ function RegisterForm() {
                                     className="form-control inp_number"
                                     id='mobile'
                                 />
-
                                 {/* If validation is not passed show errors */}
                                 <p className="error">
                                     {errors.mobile && touched.mobile && errors.mobile}
@@ -164,27 +156,29 @@ function RegisterForm() {
                                     className="form-control inp_text"
                                     id="plan"
                                 /> */}
+                                {/* If validation is not passed show errors */}
+                                {/* <p className="error">
+                                    {errors.plan && touched.plan && errors.plan}
+                                </p> */}
+
                                 <BasicSelect
+                                    data={pricingServiceData}
                                     type="plan"
                                     name="plan"
-                                    selectData={pricingServiceData}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.plan}
-                                    placeholder={currentPackage ? currentPackage : 'Select your favorites package'}
+                                    value={values.currentAddress}
+                                    placeholder={currentPackage ? currentPackage : 'Select your favorites plan'}
                                     className="form-control input_select"
                                     id="plan"
                                 />
-
-                                {/* If validation is not passed show errors */}
                                 <p className="error">
-                                    {errors.plan && touched.plan && errors.plan}
+                                    {errors.currentAddress && touched.currentAddress && errors.currentAddress}
                                 </p>
-
                                 <BasicSelect
+                                    data={city}
                                     type="currentAddress"
                                     name="currentAddress"
-                                    selectData={city}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.currentAddress}
@@ -195,33 +189,21 @@ function RegisterForm() {
                                 <p className="error">
                                     {errors.currentAddress && touched.currentAddress && errors.currentAddress}
                                 </p>
-
                                 <BasicSelect
-
+                                    data={city}
                                     type="newAddress"
                                     name="newAddress"
-                                    selectData={city}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.newAddress}
-                                    placeholder="Select your New Address"
+                                    placeholder="Select your new Address"
                                     className="form-control input_select"
                                     id="newAddress"
                                 />
                                 <p className="error">
                                     {errors.newAddress && touched.newAddress && errors.newAddress}
                                 </p>
-                                {/* <input
-                                    type="moveDate"
-                                    name="moveDate"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.moveDate}
-                                    placeholder="Enter your move Date"
-                                    className="form-control inp_text"
-                                    id="moveDate"
-                                /> */}
-
+                              
                                 <ExampleDate
                                     type="moveDate"
                                     name="moveDate"
@@ -231,18 +213,15 @@ function RegisterForm() {
                                     placeholder="Enter your move Date"
                                     className="form-control inp_text"
                                     id="moveDate"
-                                // value={formik.values.moveDate}
-                                // onChange={(value) => {
-                                //         formik.setFieldValue('moveDate', Date.parse(value));
-                                //         }}
+                             
                                 />
+                                <CheckboxLabels 
+                                label='Suggested Apartment'
+                                name= 'isSuggestedApartment'
+                                checked={values.isSuggestedApartment}
+                                onChange={setFieldValue}
 
-                                {/* If validation is not passed show errors */}
-                                {/* <p className="error">
-                                    {errors.moveDate && touched.moveDate && errors.moveDate}
-                                </p> */}
-
-                               <Checkbox name='Suggested Apartment'/>
+                                />
 
                                 {/* Click on submit button to submit the form */}
                                 <button type="submit">Register</button>
@@ -251,7 +230,6 @@ function RegisterForm() {
                     </div>
                 )}
             </Formik>
-
         </>
     );
 }

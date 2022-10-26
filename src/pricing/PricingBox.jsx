@@ -1,8 +1,8 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { setPackage } from "../store/package/packageSlice.js";
 import Box from "./Box.jsx";
+import {useDispatch, useSelector} from "react-redux";
+import {setPackage} from "../store/package/packageSlice";
+import {useNavigate} from "react-router-dom";
 
 
 const PricingBox = () => {
@@ -28,13 +28,13 @@ const PricingBox = () => {
     "Theo dõi tất cả các hoạt động trực tuyến",
     "Các yêu cầu khác nếu có"
   ];
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
 
-  const handleClickPackage=(packageName)=>{
-    console.log({packageName});
-    dispatch(setPackage(packageName))
-    navigate('/register')
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSelectPackage = (planName) => {
+    dispatch(setPackage(planName));
+    navigate("/register");
   }
   return (
     <div className="card-deck mb-3 text-center">
@@ -44,7 +44,8 @@ const PricingBox = () => {
         btnClass="btn-outline-primary"
         btnTitle="ĐĂNG KÝ"
         feature={featureBox1}
-        handleClickPackage={handleClickPackage}
+        handleSelectPackage={handleSelectPackage}
+
       />
       <Box
         price="1500"
@@ -52,7 +53,7 @@ const PricingBox = () => {
         btnClass="btn-primary"
         btnTitle="CHUYỂN NGAY"
         feature={featureBox2}
-        handleClickPackage={handleClickPackage}
+        handleSelectPackage={handleSelectPackage}
       />
       <Box
         price="100.000"
@@ -60,7 +61,8 @@ const PricingBox = () => {
         btnClass="btn-outline-primary"
         btnTitle="NHẬN TƯ VẤN NGAY"
         feature={featureBox3}
-        handleClickPackage={handleClickPackage}
+        handleSelectPackage={ handleSelectPackage}
+
       />
     </div>
   );

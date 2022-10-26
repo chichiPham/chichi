@@ -1,4 +1,5 @@
-import {Fragment,React} from "react";
+import React from "react";
+import {Fragment} from "react";
 import DataTable from "../../components/table/data-table.component";
 import SuggestedApartment from "../../components/modules/suggested-apartment.component";
 import SuggestedMovingService from "../../components/modules/suggested-moving-service.component";
@@ -7,9 +8,8 @@ import SuggestedMovingService from "../../components/modules/suggested-moving-se
 const Service = () => {
     return (
         <Fragment>
-          
-            <DataTable /> 
-             <SuggestedApartment />
+            <DataTable />
+            <SuggestedApartment />
             <SuggestedMovingService />
         </Fragment>
     )

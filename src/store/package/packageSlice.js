@@ -1,21 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  currentPackage: '',
+    currentPackage: "",
 }
 
-export const PackageSlice = createSlice({
-  name: 'packageSlice',
-  initialState,
-  reducers: {
-    setPackage: (state, action)=>{
-        state.currentPackage=action.payload
+export const packageSlice = createSlice({
+    name: 'packageSlice',
+    initialState,
+    reducers: {
+        setPackage: (state, actions)  => {
+            state.currentPackage = actions.payload;
+        },
+        resetPackage: () => initialState,
+
     },
-    resetPackage: ()=>initialState
-  },
 })
 
 // Action creators are generated for each case reducer function
-export const { setPackage, resetPackage} = PackageSlice.actions
-
-export default PackageSlice.reducer
+const {reducer, actions} = packageSlice;
+export const { setPackage, resetPackage } = actions;
+export default reducer;
