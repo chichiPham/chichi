@@ -33,17 +33,15 @@ function SignInForm() {
 
                 onSubmit =  { async (values) => {
                     try {
-                        const {email, password, remember} = values;
-                        console.log(values);
+                        const {email, password, rememberMe} = values;
 
                         const logInResult = await LoginApi.login(email, password);
-                        console.log(logInResult.token);
+                        console.log(logInResult);
 
                         if (logInResult.token) {
-                            console.log("======>")
                             // Save to storage
-                            dispatch(setIsRememberMe(remember));
-                            storage.setRememberMe(remember);
+                            dispatch(setIsRememberMe(rememberMe));
+                            storage.setRememberMe(rememberMe);
                             storage.setToken(logInResult.token);
                             storage.setUserInfo(
                                 logInResult.userName,
@@ -53,6 +51,7 @@ function SignInForm() {
                                 logInResult.role,
                                 logInResult.status
                             );
+
                             // Save to store
                             dispatch(setToken(logInResult.token));
                             dispatch(setUserInfo({
@@ -64,7 +63,7 @@ function SignInForm() {
                                 status: logInResult.status,
                             }));
 
-                            navigate('/services', {replace: true});
+                            navigate('/service', {replace: true});
 
                         } else {
                             alert("log in error");
