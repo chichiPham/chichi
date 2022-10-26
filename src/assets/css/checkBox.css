@@ -1,6 +1,17 @@
 .form span {
     font-size: 16px;
     color: #4b6cb7;
-    margin-bottom: 25px;
+    margin-bottom: 5px;
     display: block;
+}
+.form-checkbox{
+    height: 50px;
+
+}
+.form-checkbox .checkbox-label{
+    height: 100%;
+
+}
+.form-checkbox span {
+    font-family: "Comfortaa", cursive;
 }

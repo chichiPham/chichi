@@ -18,8 +18,8 @@ const TopMenu = () => {
           <Button> Book Services </Button>
         </NavLink>
 
-        <NavLink >
-          <Button>  Contact </Button>
+        <NavLink to={'/payment'} >
+          <Button>  Payment </Button>
         </NavLink>
         <NavLink to={'/service'}>
           <Button>  service </Button>

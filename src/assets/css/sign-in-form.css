@@ -90,3 +90,14 @@ body {
     font-size: 10px;
     color: red;
 }
+
+.sublink{
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+.sublink a{
+   margin: 0 10px;
+   font-size: 1rem;
+   font-family: "Comfortaa", cursive;
+}

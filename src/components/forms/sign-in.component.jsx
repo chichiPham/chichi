@@ -1,9 +1,10 @@
-import "../../assets/css/sign-in-form.css";
+import React from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
+import "../../assets/css/sign-in-form.css";
 import CheckboxLabels from "./CheckBoxLabels";
-import React from "react";
-import { Checkbox, FormControlLabel } from "@mui/material";
+import { NavLink } from "react-router-dom";
+
 // Creating schema
 const schema = Yup.object().shape({
     email: Yup.string()
@@ -69,13 +70,18 @@ function SignInForm() {
                                 <p className="error">
                                     {errors.password && touched.password && errors.password}
                                 </p>
-                                <CheckboxLabels 
-                                label='Remember Me'
-                                name= 'rememberMe'
-                                checked={values.rememberMe}
-                                onChange={setFieldValue}
+                                <CheckboxLabels
+                                    label='Remember Me'
+                                    name='rememberMe'
+                                    checked={values.rememberMe}
+                                    onChange={setFieldValue}
 
                                 />
+                                <div className='sublink'>
+                                <NavLink to={"/register"}> Đăng kí dịch vụ </NavLink>
+                                <NavLink> Quên mật khẩu </NavLink>
+                                </div>
+
                                 {/* <FormControlLabel
                                     control={<Checkbox checked={values.rememberMe} />}
                                     label='Remember Me'

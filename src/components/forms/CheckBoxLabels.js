@@ -10,9 +10,9 @@ export default function CheckboxLabels(props) {
     props.onChange(props.name, e.target.checked)
   }
   return (
-    <FormGroup>
+    <FormGroup className='form-checkbox'>
       <FormControlLabel
-        className='checkbox'
+        className='checkbox-label'
         control={<Checkbox  checked={props.checked} />}
         label={props.label} 
         name={props.name}
