@@ -4,6 +4,11 @@ import * as Yup from "yup";
 import CheckboxLabels from "./CheckBoxLabels";
 import React from "react";
 import { Checkbox, FormControlLabel } from "@mui/material";
+import storage from "../../storage/storage";
+import {useDispatch} from "react-redux";
+import {setIsRememberMe, setToken, setUserInfo} from "../../store/user/logInUserSlice";
+import {useNavigate} from "react-router-dom";
+import LoginApi from "../../api/LoginApi";
 // Creating schema
 const schema = Yup.object().shape({
     email: Yup.string()
@@ -11,20 +16,81 @@ const schema = Yup.object().shape({
         .email("Invalid email format"),
     password: Yup.string()
         .required("Password is a required field")
-        .min(8, "Password must be at least 8 characters"),
+        .min(6, "Password must be at least 6 characters"),
 });
 
 function SignInForm() {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
     return (
         <>
             {/* Wrapping form inside formik tag and passing our schema to validationSchema prop */}
             <Formik
                 validationSchema={schema}
                 initialValues={{ email: "", password: "", rememberMe: false }}
-                onSubmit={(values) => {
-                    // Alert the input values of the form that we filled
-                    alert(JSON.stringify(values));
+                // onSubmit = {({email, password, rememberMe}) => onSubmit(email, password, rememberMe)}
+
+                onSubmit =  { async (values) => {
+                    const {email, password, remember} = values;
+                    try {
+                        const logInResult = await LoginApi.login(email, password);
+                        console.log(logInResult);
+
+                        if (logInResult.token != null) {
+                            // Save to storage
+                            dispatch(setIsRememberMe(remember));
+                            storage.setRememberMe(remember);
+                            storage.setToken(logInResult.token);
+                            storage.setUserInfo(
+                                logInResult.userName,
+                                logInResult.email,
+                                logInResult.firstName,
+                                logInResult.lastName,
+                                logInResult.role,
+                                logInResult.status
+                            );
+                            // Save to store
+                            dispatch(setToken(logInResult.token));
+                            dispatch(setUserInfo({
+                                username: logInResult.userName,
+                                email: logInResult.email,
+                                firstName: logInResult.firstName,
+                                lastName: logInResult.lastName,
+                                role: logInResult.role,
+                                status: logInResult.status,
+                            }));
+
+                            navigate('/services', {replace: true});
+
+                        } else {
+                            alert("log in error");
+                            // dispatch(setSnackBar({
+                            //     severity: "error",
+                            //     title: "Account not activated",
+                            //     message: "Your account needs to be activated to log in.",
+                            // }));
+                            // dispatch(openSnackBar());
+                        }
+                        ;
+
+
+                    } catch (e) {
+                        alert("log in error");
+                        // dispatch(setSnackBar({
+                        //     severity: "error",
+                        //     title: "Log in Failed",
+                        //     message: "Username and Password doesn't match!",
+                        // }));
+                        // dispatch(openSnackBar());
+                        // reset();
+                    }
                 }}
+                // onSubmit={(values) => {
+                //
+                //     // Alert the input values of the form that we filled
+                //     alert(JSON.stringify(values));
+                // }}
             >
                 {({
                     values,
@@ -47,7 +113,7 @@ function SignInForm() {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value={values.email}
-                                    placeholder="Enter email id / username"
+                                    placeholder="Enter email"
                                     className="form-control inp_text"
                                     id="email"
                                 />
