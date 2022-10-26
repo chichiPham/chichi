@@ -32,12 +32,15 @@ function SignInForm() {
                 // onSubmit = {({email, password, rememberMe}) => onSubmit(email, password, rememberMe)}
 
                 onSubmit =  { async (values) => {
-                    const {email, password, remember} = values;
                     try {
-                        const logInResult = await LoginApi.login(email, password);
-                        console.log(logInResult);
+                        const {email, password, remember} = values;
+                        console.log(values);
 
-                        if (logInResult.token != null) {
+                        const logInResult = await LoginApi.login(email, password);
+                        console.log(logInResult.token);
+
+                        if (logInResult.token) {
+                            console.log("======>")
                             // Save to storage
                             dispatch(setIsRememberMe(remember));
                             storage.setRememberMe(remember);
