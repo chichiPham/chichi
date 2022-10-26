@@ -1,4 +1,21 @@
-.btn {
-    width: 50%;
-    margin: auto;
+
+.payment {
+
+    font-family: "Comfortaa", cursive;
+    font-size: 1.5rem;
+    width: 100%;
+}
+
+.payment img {
+    margin-top: -80px;
+}
+.payment button {
+   width: auto;
+   margin: auto;
+}
+.payment .btn-service {
+    display: flex;
+    margin-top: 23px;
+    margin-bottom: 89px;
+    
 }
