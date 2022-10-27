@@ -1,17 +1,18 @@
 import { Formik } from "formik";
-import * as Yup from "yup";
-import "../../assets/css/sign-in-form.css";
-import CheckboxLabels from './CheckBoxLabels';
-import BasicSelect from './customSelectInput';
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { resetPackage } from "../../store/package/packageSlice";
+import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
+import userApi from "../../api/UserApi";
+import "../../assets/css/sign-in-form.css";
 import { city, plan } from "../../dataFill/data";
+import { resetPackage } from "../../store/package/packageSlice";
 import ExampleDate from "../date_picker/date-picker";
-// import { city2, pricingServiceData2 } from "../../dataFill/data2";
+import CheckboxLabels from './CheckBoxLabels';
+import BasicSelect from './customSelectInput';
 
 
-// Creating schema
+
 const schema = Yup.object().shape({
 
     email: Yup.string()
@@ -33,9 +34,7 @@ const schema = Yup.object().shape({
         .max(15, 'Maximum 15 characters')
         .required('Required'),
 
-    plan: Yup.string()
-        .min(3, 'Minimum 3 characters')
-        .max(15, 'Maximum 15 characters')
+    plan: Yup.number()
         .required('Required'),
 
     currentAddress: Yup.string()
@@ -45,17 +44,32 @@ const schema = Yup.object().shape({
         .required('Required'),
 
     moveDate: Yup.string()
-        .min(3, 'Minimum 3 characters')
-        .max(15, 'Maximum 15 characters')
         .required('Required'),
 });
 
 function RegisterForm() {
     const currentPackage = useSelector(state => state.package.currentPackage);
+    console.log("currentPackage = " + currentPackage);
+    let planId;
+    switch (currentPackage) {
+        case 'Gói Tiết Kiệm':
+            planId = 1;
+            break;
+        case 'Gói Hợp Lý':
+            planId = 2;
+            break;
+        case 'Gói VIP':
+            planId = 3;
+            break;
+    }
+
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     return (
         <>
-            {/* Wrapping form inside formik tag and passing our schema to validationSchema prop */}
+
+            {/*Wrapping form inside formik tag and passing our schema to validationSchema prop*/}
+
             <Formik
                 validationSchema={schema}
                 initialValues={{
@@ -63,18 +77,57 @@ function RegisterForm() {
                     password: '',
                     name: '',
                     mobile: '',
-                    plan: currentPackage,
+                    plan: planId,
                     currentAddress: '',
                     newAddress: '',
                     moveDate: '',
                     isSuggestedApartment: true
                 }}
-                onSubmit={(values) => {
-                    // Alert the input values of the form that we filled
-                    dispatch(resetPackage());
-                    alert(JSON.stringify(values));
+
+                // onSubmit={(values) => console.log(values)}
+
+                // onSubmit={(values) => {
+                //     // Alert the input values of the form that we filled
+                //     dispatch(resetPackage());
+                //     alert(JSON.stringify(values));
+                // }}
+                onSubmit={async (values) => {
+                    const { email, password, name, mobile, plan, currentAddress,
+                        newAddress, moveDate, isSuggestedApartment } = values;
+
+                    let isHasApartmentAlready;
+
+                    isSuggestedApartment === true ?
+                        isHasApartmentAlready = 1 : isHasApartmentAlready = 0;
+
+
+                    try {
+                        const data = {
+                            "email": email,
+                            "phone": mobile,
+                            "password": password,
+                            "fullName": name,
+                            "role": "CUSTOMER",
+                            "currentCity": currentAddress,
+                            "newCity": newAddress,
+                            "movingDate": moveDate,
+                            "planId": plan,
+                            "isHasApartmentAlready": isHasApartmentAlready,
+                            "distance": "100"
+                        }
+
+                        const registerResponse = await userApi.createUserAndOrder(data)
+                        console.log(registerResponse);
+
+                        dispatch(resetPackage());
+                        alert(JSON.stringify(values));
+
+                    } catch (error) {
+                        alert('error')
+                    }
+
                 }}
-        
+
             >
                 {({
                     values,
@@ -148,20 +201,7 @@ function RegisterForm() {
                                 <p className="error">
                                     {errors.mobile && touched.mobile && errors.mobile}
                                 </p>
-                                {/* <input
-                                    type="plan"
-                                    name="plan"
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    value={values.plan}
-                                    placeholder="Enter your plan"
-                                    className="form-control inp_text"
-                                    id="plan"
-                                /> */}
-                                {/* If validation is not passed show errors */}
-                                {/* <p className="error">
-                                    {errors.plan && touched.plan && errors.plan}
-                                </p> */}
+                             
 
                                 <BasicSelect
                                     data={plan}
@@ -169,7 +209,7 @@ function RegisterForm() {
                                     name="plan"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value={values.currentAddress}
+                                    value={values.currentPackage}
                                     placeholder={currentPackage ? currentPackage : 'Select your favorites plan'}
                                     className="form-control input_select"
                                     id="plan"
@@ -205,7 +245,7 @@ function RegisterForm() {
                                 <p className="error">
                                     {errors.newAddress && touched.newAddress && errors.newAddress}
                                 </p>
-                              
+
                                 <ExampleDate
                                     type="moveDate"
                                     name="moveDate"
@@ -215,13 +255,13 @@ function RegisterForm() {
                                     placeholder="Enter your move Date"
                                     className="form-control inp_text"
                                     id="moveDate"
-                             
+
                                 />
-                                <CheckboxLabels 
-                                label='Suggested Apartment'
-                                name= 'isSuggestedApartment'
-                                checked={values.isSuggestedApartment}
-                                onChange={setFieldValue}
+                                <CheckboxLabels
+                                    label='Suggested Apartment'
+                                    name='isSuggestedApartment'
+                                    checked={values.isSuggestedApartment}
+                                    onChange={setFieldValue}
 
                                 />
 

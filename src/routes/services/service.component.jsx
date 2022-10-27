@@ -8,9 +8,10 @@ import Payment from "../../pages/payment";
 
 const Service = () => {
 
-    const isPay = true
-    
-    if (isPay) {
+    const isPay = false
+
+        if (isPay) {
+
         return (
             <>
                 <DataTable />
