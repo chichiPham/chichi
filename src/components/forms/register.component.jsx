@@ -2,13 +2,12 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import "../../assets/css/sign-in-form.css";
 import CheckboxLabels from './CheckBoxLabels';
-import BasicSelect from './selectAddress';
+import BasicSelect from './customSelectInput';
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { resetPackage } from "../../store/package/packageSlice";
-import { city, pricingServiceData } from "../../dataFill/data";
+import { city, plan } from "../../dataFill/data";
 import ExampleDate from "../date_picker/date-picker";
-import { NavLink } from "react-router-dom";
 
 
 // Creating schema
@@ -163,7 +162,7 @@ function RegisterForm() {
                                 </p> */}
 
                                 <BasicSelect
-                                    data={pricingServiceData}
+                                    data={plan}
                                     type="plan"
                                     name="plan"
                                     onChange={handleChange}
@@ -204,7 +203,7 @@ function RegisterForm() {
                                 <p className="error">
                                     {errors.newAddress && touched.newAddress && errors.newAddress}
                                 </p>
-
+                              
                                 <ExampleDate
                                     type="moveDate"
                                     name="moveDate"
@@ -214,19 +213,16 @@ function RegisterForm() {
                                     placeholder="Enter your move Date"
                                     className="form-control inp_text"
                                     id="moveDate"
+                             
+                                />
+                                <CheckboxLabels 
+                                label='Suggested Apartment'
+                                name= 'isSuggestedApartment'
+                                checked={values.isSuggestedApartment}
+                                onChange={setFieldValue}
 
                                 />
-                                <CheckboxLabels
-                                    label='Suggested Apartment'
-                                    name='isSuggestedApartment'
-                                    checked={values.isSuggestedApartment}
-                                    onChange={setFieldValue}
 
-                                />
-                                <div className='sublink'>
-                                    <NavLink to={'/sign-in'}> Đã có tài khoàn, đăng nhập  </NavLink>
-                               
-                                </div>
                                 {/* Click on submit button to submit the form */}
                                 <button type="submit">Register</button>
                             </form>

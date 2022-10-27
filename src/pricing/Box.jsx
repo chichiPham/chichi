@@ -2,9 +2,9 @@ import React from "react";
 import { BiYen } from "react-icons/bi"
 import { BsCheckCircle } from "react-icons/bs";
 const Box = (props) => {
-  const { title, btnClass, btnTitle, price, feature, handleSelectPackage } = props;
+  const { title, btnClass, btnTitle, price, feature, handleSelectPackage ,key} = props;
   return (
-    <div className="card mb-4 shadow-sm">
+    <>
       <div className="card-header">
         <h4 className="my-0 font-weight-normal">{title}</h4>
       </div>
@@ -30,7 +30,7 @@ const Box = (props) => {
         >
         {btnTitle}
       </button>
-    </div>
+    </>
   );
 };
 
