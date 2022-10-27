@@ -28,9 +28,16 @@ const create = (username, email, password, firstname, lastname) => {
 const createUserWithObject = (data) => {
     const body = {
         ...data,
-        userName: data.username
+        // userName: data.username
     }
     return Api.post(url, body);
+};
+const createUserAndOrder = (data) => {
+
+    const body = {
+        ...data,
+    }
+    return Api.post(`${url}/createUAO`, body);
 };
 
 const resendEmailToActiveAccount = (email) => {
@@ -42,6 +49,12 @@ const resendEmailToActiveAccount = (email) => {
 };
 
 // export
-const userApi = { existsByEmail, existsByUsername, create,
-    createUserWithObject, resendEmailToActiveAccount, getUserProfile }
+const userApi = {
+    existsByEmail,
+    existsByUsername,
+    create, createUserAndOrder,
+    createUserWithObject,
+    resendEmailToActiveAccount,
+    getUserProfile
+}
 export default userApi;

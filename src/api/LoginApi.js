@@ -2,9 +2,9 @@ import Api from './Api';
 
 const url = "/login";
 
-const login = (username, password) => {
+const login = (email, password) => {
     const requestParams = {
-        username,
+        email,
         password
     }
 

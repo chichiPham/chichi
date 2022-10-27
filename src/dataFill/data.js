@@ -46,9 +46,9 @@ const pricingServiceData = [
 
 ]
 const plan=[
-    { id: 1, name: "Gói Tiết Kiệm",value:'Gói Tiết Kiệm ' },
-    { id: 2, name: 'Gói Hợp Lý',value:'Gói Hợp Lý' },
-    { id: 3, name: 'Gói VIP', value:'Gói VIP'},
+    { id: 1, name: "Gói Tiết Kiệm",value:1},
+    { id: 2, name: 'Gói Hợp Lý',value:2},
+    { id: 3, name: 'Gói VIP', value:3},
 ]
 const city = [
 
