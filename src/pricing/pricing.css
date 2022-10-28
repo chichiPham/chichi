@@ -22,5 +22,10 @@ html {
   text-align: left !important;
   line-height: 2;
 }
+.btn-block {
+  width: 80%;
+  margin-left: 30px;
+  margin-bottom: 20px;
+}
 
 

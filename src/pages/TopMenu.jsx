@@ -2,6 +2,8 @@ import {Button} from "@mui/material";
 import React from "react";
 import {NavLink, Outlet} from "react-router-dom";
 import {useSelector} from "react-redux";
+import logo from "../assets/images/logoHIKKOSHI.png";
+import "../assets/css/header.css";
 
 const TopMenu = () => {
     const token = useSelector(state => state.logInUser.token)
@@ -11,7 +13,9 @@ const TopMenu = () => {
 
             <div
                 className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-                <h5 className="my-0 mr-md-auto font-weight-normal">Relocation service</h5>
+                <h5 className="my-0 mr-md-auto font-weight-normal">
+                    <a href="/"><img style={{width: '30%', cursor: 'pointer', marginLeft: '100px'}}  src={logo} alt="Relocation service" /></a>
+                </h5>
                 <nav className="my-2 my-md-0 mr-md-3">
                     
                     {/* <NavLink to={"/"}>
@@ -34,29 +38,29 @@ const TopMenu = () => {
                     </NavLink> */}
 
                     <NavLink to={"/"}>
-                        <Button> Home </Button>
+                        <Button className="btn-menu"> Home </Button>
                     </NavLink>
 
                     {
                         !token &&
                         <NavLink to={"/register"}>
-                            <Button> Book Services </Button>
+                            <Button  className="btn-menu"> Book Services </Button>
                         </NavLink>
                     }
                     <NavLink>
-                        <Button> Contact </Button>
+                        <Button  className="btn-menu"> Contact </Button>
                     </NavLink>
                     {
                         token &&
                         <NavLink to={'/service'}>
-                            <Button> Service </Button>
+                            <Button  className="btn-menu"> Service </Button>
                         </NavLink>
                     }
 
                     {
                         !token &&
                     <NavLink to={"/sign-in"}>
-                        <Button> Sign in </Button>
+                        <Button  className="btn-menu"> Sign in </Button>
                     </NavLink>
                     }
                     

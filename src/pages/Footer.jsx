@@ -1,13 +1,16 @@
 import React from "react";
-import logo from "../bootstrap-solid.svg";
+// import logo from "../bootstrap-solid.svg";
+import logo from "../assets/images/logoHIKKOSHI.png";
 
 const Footer = () => {
   return (
     <footer className="pt-4 my-md-5 pt-md-5 border-top">
       <div className="row">
         <div className="col-12 col-md">
-          <img className="mb-2" src={logo} alt="" width="24" height="24" />
-          <small className="d-block mb-3 text-muted">&copy; 2020-2022</small>
+          {/* <img className="mb-2" src={logo} alt="" width="24" height="24" />
+          <small className="d-block mb-3 text-muted">&copy; 2020-2022</small> */}
+          <a href="/"><img className="mb-2" src={logo} alt="" width="80"/></a>
+          <small style={{marginLeft: '20px'}} className="d-block mb-3 text-muted">&copy; 2022</small>
         </div>
         <div className="col-6 col-md">
           <h5>Địa chỉ</h5>
