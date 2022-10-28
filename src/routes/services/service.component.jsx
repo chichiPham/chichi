@@ -6,6 +6,7 @@ import SuggestedMovingService from "../../components/modules/suggested-moving-se
 import Payment from "../../pages/payment";
 
 
+
 const Service = () => {
 
     const isPay = false
@@ -22,7 +23,7 @@ const Service = () => {
     }
     return (
         <>
-            <Payment />
+            <Payment/>
         </>
     )
 }
