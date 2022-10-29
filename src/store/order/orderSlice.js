@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
+    orderId:'',
     plan: {},
     currentCity: "",
     newCity: "",
@@ -19,6 +20,9 @@ export const orderSlice = createSlice({
     name: 'orderSlice',
     initialState,
     reducers: {
+        setOrderId: (state, actions) => {
+            state.orderId = actions.payload;
+        },
         setOrderPlan: (state, actions) => {
             state.plan = actions.payload;
         },
@@ -51,6 +55,7 @@ export const orderSlice = createSlice({
 // Action creators are generated for each case reducer function
 const { actions } = orderSlice;
 export const {
+    setOrderId,
     setOrderPlan,
     setOrderCurrentCity,
     setOrderNewCity,

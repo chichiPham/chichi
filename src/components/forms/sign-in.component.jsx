@@ -10,7 +10,11 @@ import { setIsRememberMe, setToken, setUserInfo } from "../../store/user/logInUs
 import { NavLink, useNavigate } from "react-router-dom";
 import LoginApi from "../../api/LoginApi";
 import orderApi from "../../api/OderApi";
-import { setOrderCurrentCity, setOrderDistance, setOrderIsHasApartmentAlready, setOrderMovingDate, setOrderNewCity, setOrderPaymentStatus, setOrderPlan } from "../../store/order/orderSlice";
+import {
+    setOrderId, setOrderCurrentCity, setOrderDistance,
+    setOrderIsHasApartmentAlready, setOrderMovingDate, 
+    setOrderNewCity, setOrderPaymentStatus, setOrderPlan
+} from "../../store/order/orderSlice";
 
 // Creating schema
 const schema = Yup.object().shape({
@@ -70,8 +74,9 @@ function SignInForm() {
 
                             const orderResponse = await orderApi.getOrderInfo(logInResult.id);
 
-                            console.log( orderResponse.plan );
+                            console.log('order id', orderResponse.id );
                             if (orderResponse) {
+                                dispatch(setOrderId(orderResponse.id))
                                 dispatch(setOrderPlan(orderResponse.plan))
                                 dispatch(setOrderCurrentCity(orderResponse.currentCity))
                                 dispatch(setOrderNewCity(orderResponse.newCity))
@@ -79,7 +84,7 @@ function SignInForm() {
                                 dispatch(setOrderIsHasApartmentAlready(orderResponse.isHasApartmentAlready))
                                 dispatch(setOrderDistance(orderResponse.distance))
                                 dispatch(setOrderPaymentStatus(orderResponse.payment_status))
-                                
+
                                 navigate('/service', { replace: true });
 
 
