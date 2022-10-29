@@ -1,0 +1,62 @@
+import { createSlice } from '@reduxjs/toolkit'
+
+const initialState = {
+    plan: {},
+    currentCity: "",
+    newCity: "",
+    movingDate: "",
+    isHasApartmentAlready: '',
+    distance: 0,
+    paymentStatus: null,
+
+    // payment_details: null,
+    // payment_date: null,
+    // status: '',
+    // created_date: ''
+}
+
+export const orderSlice = createSlice({
+    name: 'orderSlice',
+    initialState,
+    reducers: {
+        setOrderPlan: (state, actions) => {
+            state.plan = actions.payload;
+        },
+        setOrderCurrentCity: (state, actions) => {
+            state.currentCity = actions.payload;
+        },
+        setOrderNewCity: (state, actions) => {
+            state.newCity = actions.payload;
+        },
+        setOrderMovingDate: (state, actions) => {
+            state.movingDate = actions.payload;
+        },
+
+        setOrderDistance: (state, actions) => {
+            state.distance = actions.payload
+        },
+
+        setOrderIsHasApartmentAlready: (state, actions) => {
+            state.isHasApartmentAlready = actions.payload
+        },
+
+        setOrderPaymentStatus: (state, actions) => {
+            // state.paymentStatus = actions.payload
+            state.paymentStatus = actions.payload
+        }
+
+    },
+})
+
+// Action creators are generated for each case reducer function
+const { actions } = orderSlice;
+export const {
+    setOrderPlan,
+    setOrderCurrentCity,
+    setOrderNewCity,
+    setOrderMovingDate,
+    setOrderDistance,
+    setOrderIsHasApartmentAlready,
+    setOrderPaymentStatus
+} = actions;
+

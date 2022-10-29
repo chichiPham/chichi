@@ -1,8 +1,10 @@
+import axios from "axios";
 import { Formik } from "formik";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import serviceApi from "../../api/Service";
 import userApi from "../../api/UserApi";
 import "../../assets/css/sign-in-form.css";
 import { city, plan } from "../../dataFill/data";
@@ -65,6 +67,10 @@ function RegisterForm() {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const _onBlur = (e) => {
+        
+    }
     return (
         <>
 
@@ -91,10 +97,15 @@ function RegisterForm() {
                 //     dispatch(resetPackage());
                 //     alert(JSON.stringify(values));
                 // }}
+
                 onSubmit={async (values) => {
+                  
                     const { email, password, name, mobile, plan, currentAddress,
                         newAddress, moveDate, isSuggestedApartment } = values;
 
+                    const distanceResponse = await serviceApi.getDistanceBetweenTwoCities(currentAddress,newAddress)
+                    console.log('distance Response',distanceResponse);   
+                       
                     let isHasApartmentAlready;
 
                     isSuggestedApartment === true ?
@@ -136,7 +147,7 @@ function RegisterForm() {
                     handleChange,
                     handleBlur,
                     handleSubmit,
-                    setFieldValue
+                    setFieldValue,
                 }) => (
                     <div className="register">
                         <div className="form">
@@ -148,7 +159,7 @@ function RegisterForm() {
                                     type="email"
                                     name="email"
                                     onChange={handleChange}
-                                    onBlur={handleBlur}
+                                    onBlur={_onBlur}
                                     value={values.email}
                                     placeholder="Enter email id / username"
                                     className="form-control inp_text"
@@ -201,7 +212,7 @@ function RegisterForm() {
                                 <p className="error">
                                     {errors.mobile && touched.mobile && errors.mobile}
                                 </p>
-                             
+
 
                                 <BasicSelect
                                     data={plan}

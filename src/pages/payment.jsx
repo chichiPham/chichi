@@ -1,13 +1,26 @@
 import React from 'react';
 import payment from "../assets/images/background/Payment.jpg";
 import '../assets/css/payment.css'
+import { useDispatch } from 'react-redux';
+import { setOrderPaymentStatus } from '../store/order/orderSlice';
+import { useNavigate } from 'react-router-dom';
 const Payment = () => {
+    const dispatch=useDispatch();
+    const navigate=useNavigate();
+
+    const _clickPayment=()=>{
+        dispatch(setOrderPaymentStatus(true));
+        alert('Thanh toán thành công, xin cảm ơn quý khách !')
+        navigate('/service')
+    }
     return (
         <div className='payment'>
             <div className="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
                 <span className='payment-content'>Bạn chưa thanh toán dịch vụ, xin mời thanh toán để tận hưởng tốt nhất </span>
                 <div className="btn-service">
-                    <button type="button" className="btn btn-lg btn-outline-primary">THANH TOÁN NGAY </button>
+                    <button 
+                    onClick={_clickPayment}
+                    type="button" className="btn btn-lg btn-outline-primary">THANH TOÁN NGAY </button>
                 </div>
                 <img  src={payment} alt="anh chuyen nha" />
 

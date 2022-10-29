@@ -34,4 +34,3 @@ export const logInUserSlice = createSlice({
 // Action creators are generated for each case reducer function
 const {reducer, actions} = logInUserSlice;
 export const { setToken, setUserInfo, setIsRememberMe, setAvatarUrl } = actions;
-export default logInUserSlice.reducer;

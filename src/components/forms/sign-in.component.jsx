@@ -9,6 +9,8 @@ import { useDispatch } from "react-redux";
 import { setIsRememberMe, setToken, setUserInfo } from "../../store/user/logInUserSlice";
 import { NavLink, useNavigate } from "react-router-dom";
 import LoginApi from "../../api/LoginApi";
+import orderApi from "../../api/OderApi";
+import { setOrderCurrentCity, setOrderDistance, setOrderIsHasApartmentAlready, setOrderMovingDate, setOrderNewCity, setOrderPaymentStatus, setOrderPlan } from "../../store/order/orderSlice";
 
 // Creating schema
 const schema = Yup.object().shape({
@@ -66,7 +68,33 @@ function SignInForm() {
                                 status: logInResult.status,
                             }));
 
-                            navigate('/service', { replace: true });
+                            const orderResponse = await orderApi.getOrderInfo(logInResult.id);
+
+                            console.log( orderResponse.plan );
+                            if (orderResponse) {
+                                dispatch(setOrderPlan(orderResponse.plan))
+                                dispatch(setOrderCurrentCity(orderResponse.currentCity))
+                                dispatch(setOrderNewCity(orderResponse.newCity))
+                                dispatch(setOrderMovingDate(orderResponse.movingDate))
+                                dispatch(setOrderIsHasApartmentAlready(orderResponse.isHasApartmentAlready))
+                                dispatch(setOrderDistance(orderResponse.distance))
+                                dispatch(setOrderPaymentStatus(orderResponse.payment_status))
+                                
+                                navigate('/service', { replace: true });
+
+
+                            } else {
+                                alert("Load order info error");
+                                // dispatch(setSnackBar({
+                                //     severity: "error",
+                                //     title: "Account not activated",
+                                //     message: "Your account needs to be activated to log in.",
+                                // }));
+                                // dispatch(openSnackBar());
+                            }
+
+
+
 
                         } else {
                             alert("log in error");
