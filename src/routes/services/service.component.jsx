@@ -5,17 +5,17 @@ import SuggestedApartment from "../../components/modules/suggested-apartment.com
 import SuggestedMovingService from "../../components/modules/suggested-moving-service.component";
 import Payment from "../../pages/payment";
 import { useSelector } from "react-redux";
-
+import UserProflie from "../../components/userProfile/UserProfile";
 
 
 const Service = () => {
-    const paymentStatus=useSelector(state=>state.order.paymentStatus)
+    const paymentStatus = useSelector(state => state.order.paymentStatus)
     // const isPay = false
 
-        if (paymentStatus) {
+    if (paymentStatus) {
 
         return (
-            <>
+            <>  <UserProflie />
                 <DataTable />
                 <SuggestedApartment />
                 <SuggestedMovingService />
@@ -24,7 +24,7 @@ const Service = () => {
     }
     return (
         <>
-            <Payment/>
+            <Payment />
         </>
     )
 }

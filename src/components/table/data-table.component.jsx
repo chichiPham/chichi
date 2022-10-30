@@ -29,7 +29,7 @@ function createData(proposalDate, name, planB) {
 }
 // gia tri tai len tu database
 const rows = [
-    createData('', 'Tìm nhà*', ''),
+    createData('11/11/2022', 'Tìm nhà*', 'qwert'),
     createData('', 'Ký hợp đồng thuê nhà*', ''),
     createData('', 'Cắt hợp đồng nhà', ''),
     createData('', 'Cắt hợp đồng điện, nước, ga, internet', ''),
@@ -297,7 +297,7 @@ export default function EnhancedTable() {
                                             key={row.name}
                                             selected={isItemSelected}
                                         >
-                                            <TableCell align="right">{row.proposalDate}
+                                            <TableCell align="left">{row.proposalDate}
                                             </TableCell>
                                             <TableCell
                                                 component="th"
@@ -315,11 +315,7 @@ export default function EnhancedTable() {
                                                     }}
                                                 />
                                             </TableCell>
-                                            <TableCell align="right">{row.done}</TableCell>
-
-                                            <TableCell align="right">{row.planB}</TableCell>
-
-
+                                            <TableCell align="left">{row.planB}</TableCell>
                                         </TableRow>
                                     );
                                 })}
