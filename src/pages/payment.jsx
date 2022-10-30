@@ -6,12 +6,10 @@ import { setOrderPaymentStatus } from '../store/order/orderSlice';
 import { useNavigate } from 'react-router-dom';
 const Payment = () => {
     const dispatch=useDispatch();
-    const navigate=useNavigate();
 
     const _clickPayment=()=>{
-        dispatch(setOrderPaymentStatus(true));
+        dispatch(setOrderPaymentStatus(1));
         alert('Thanh toán thành công, xin cảm ơn quý khách !')
-        navigate('/service')
     }
     return (
         <div className='payment'>

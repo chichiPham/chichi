@@ -12,7 +12,7 @@ import LoginApi from "../../api/LoginApi";
 import orderApi from "../../api/OderApi";
 import {
     setOrderId, setOrderCurrentCity, setOrderDistance,
-    setOrderIsHasApartmentAlready, setOrderMovingDate, 
+    setOrderIsHasApartmentAlready, setOrderMovingDate,
     setOrderNewCity, setOrderPaymentStatus, setOrderPlan
 } from "../../store/order/orderSlice";
 
@@ -56,7 +56,7 @@ function SignInForm() {
                                 logInResult.id,
                                 logInResult.email,
                                 logInResult.phone,
-                                logInResult.fullname,
+                                logInResult.fullName,
                                 logInResult.role,
                                 logInResult.status
                             );
@@ -67,23 +67,33 @@ function SignInForm() {
                                 id: logInResult.id,
                                 email: logInResult.email,
                                 phone: logInResult.phone,
-                                fullname: logInResult.fullname,
+                                fullname: logInResult.fullName,
                                 role: logInResult.role,
                                 status: logInResult.status,
                             }));
 
                             const orderResponse = await orderApi.getOrderInfo(logInResult.id);
+                            const { id, plan, currentCity,
+                                newCity, movingDate, isHasApartmentAlready,
+                                distance, payment_status } = orderResponse
 
-                            console.log('order id', orderResponse.id );
+                            console.log('order id', orderResponse.id);
+
                             if (orderResponse) {
-                                dispatch(setOrderId(orderResponse.id))
-                                dispatch(setOrderPlan(orderResponse.plan))
-                                dispatch(setOrderCurrentCity(orderResponse.currentCity))
-                                dispatch(setOrderNewCity(orderResponse.newCity))
-                                dispatch(setOrderMovingDate(orderResponse.movingDate))
-                                dispatch(setOrderIsHasApartmentAlready(orderResponse.isHasApartmentAlready))
-                                dispatch(setOrderDistance(orderResponse.distance))
-                                dispatch(setOrderPaymentStatus(orderResponse.payment_status))
+                                //save to storage
+                                storage.setOrderInfo(id, plan, currentCity,
+                                    newCity, movingDate, isHasApartmentAlready,
+                                    distance, payment_status)
+
+                                // save to store
+                                dispatch(setOrderId(id))
+                                dispatch(setOrderPlan(plan))
+                                dispatch(setOrderCurrentCity(currentCity))
+                                dispatch(setOrderNewCity(newCity))
+                                dispatch(setOrderMovingDate(movingDate))
+                                dispatch(setOrderIsHasApartmentAlready(isHasApartmentAlready))
+                                dispatch(setOrderDistance(distance))
+                                dispatch(setOrderPaymentStatus(payment_status))
 
                                 navigate('/service', { replace: true });
 

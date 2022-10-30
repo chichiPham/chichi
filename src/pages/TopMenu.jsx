@@ -1,13 +1,19 @@
 import {Button} from "@mui/material";
 import React from "react";
-import {NavLink, Outlet} from "react-router-dom";
+import { NavLink, Outlet, useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
 import logo from "../assets/images/logoHIKKOSHI.png";
 import "../assets/css/header.css";
+import storage from "../storage/storage";
 
 const TopMenu = () => {
+       const navigate=useNavigate()
     const token = useSelector(state => state.logInUser.token)
-
+    const _onClick =()=>{
+        storage.removeToken();
+        storage.removeUserInfo();
+        navigate("/sign-in");
+    }
     return (
         <>
 
@@ -47,9 +53,7 @@ const TopMenu = () => {
                             <Button  className="btn-menu"> Book Services </Button>
                         </NavLink>
                     }
-                    <NavLink>
-                        <Button  className="btn-menu"> Contact </Button>
-                    </NavLink>
+                    
                     {
                         token &&
                         <NavLink to={'/service'}>
@@ -62,6 +66,12 @@ const TopMenu = () => {
                     <NavLink to={"/sign-in"}>
                         <Button  className="btn-menu"> Sign in </Button>
                     </NavLink>
+                    }
+                    {
+                        token &&
+                        
+                        <Button onClick={_onClick}  className="btn-menu"> Logout </Button>
+                     
                     }
                     
                 </nav>

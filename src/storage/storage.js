@@ -49,23 +49,66 @@ const isAuth = () => {
     return getToken() !== null && getToken() !== undefined;
 }
 
-const setUserInfo = (username, email, firstName, lastName, role, status) => {
-    setItem("username", username);
+const setUserInfo = (id, email, phone, fullname, role, status, avatarUrl) => {
+    setItem("id", id);
     setItem("email", email);
-    setItem("firstName", firstName);
-    setItem("lastName", lastName);
+    setItem("phone", phone);
+    setItem("fullname", fullname);
     setItem("role", role);
     setItem("status", status);
-    setItem("avatarUrl", status);
+    setItem("avatarUrl", avatarUrl);
 
 }
 
+const setOrderInfo = (
+    orderId,
+    plan,
+    currentCity,
+    newCity,
+    movingDate,
+    isHasApartmentAlready,
+    distance,
+    paymentStatus) => {
+
+    setItem("orderId", orderId);
+    setItem("plan", plan);
+    setItem("currentCity", currentCity);
+    setItem("newCity", newCity);
+    setItem("movingDate", movingDate);
+    setItem("isHasApartmentAlready", isHasApartmentAlready);
+    setItem("distance", distance);
+    setItem("paymentStatus", paymentStatus);
+
+}
+const getOrderInfoToJson = () => {
+    return {
+        "orderId": getItem("orderId"),
+        "plan": getItem("plan"),
+        "currentCity": getItem("currentCity"),
+        "newCity": getItem("newCity"),
+        "movingDate": getItem("movingDate"),
+        "isHasApartmentAlready": getItem("isHasApartmentAlready"),
+        "distance": getItem("distance"),
+        "paymentStatus": getItem("paymentStatus")
+
+    };
+}
+const removeOrderInfo = () => {
+    removeItem("orderId");
+    removeItem("plan");
+    removeItem("currentCity");
+    removeItem("newCity");
+    removeItem("movingDate");
+    removeItem("isHasApartmentAlready");
+    removeItem("distance");
+    removeItem("paymentStatus");
+};
 const getUserInfoToJson = () => {
     return {
-        "username": getItem("username"),
+        "id": getItem("id"),
         "email": getItem("email"),
-        "firstName": getItem("firstName"),
-        "lastName": getItem("lastName"),
+        "phone": getItem("phone"),
+        "fullname": getItem("fullname"),
         "role": getItem("role"),
         "status": getItem("status"),
         "avatarUrl": getItem("avatarUrl")
@@ -74,16 +117,20 @@ const getUserInfoToJson = () => {
 }
 
 const removeUserInfo = () => {
-    removeItem("username");
+    removeItem("id");
     removeItem("email");
-    removeItem("firstName");
-    removeItem("lastName");
+    removeItem("phone");
+    removeItem("fullname");
     removeItem("role");
     removeItem("status");
+    removeItem("avatarUrl");
 };
 
 // export
 const storage = {
+    setOrderInfo,
+    getOrderInfoToJson,
+    removeOrderInfo,
     isRememberMe,
     setRememberMe,
     setToken,

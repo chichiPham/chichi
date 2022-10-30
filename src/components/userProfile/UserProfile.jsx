@@ -12,9 +12,17 @@ import PersonPinCircleIcon from '@mui/icons-material/PersonPinCircle';
 import WhereToVoteIcon from '@mui/icons-material/WhereToVote';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PersonIcon from '@mui/icons-material/Person';
+import { useSelector } from 'react-redux';
 
 
 export default function FolderList() {
+  const fullname= useSelector ( state=>state.logInUser.userInfo.fullname )
+  const currentCity= useSelector ( state=>state.order.currentCity )
+  const destination= useSelector ( state=>state.order.newCity )
+  const movingDate= useSelector ( state=>state.order.movingDate )
+  const distance= useSelector ( state=>state.order.distance )
+  const plan= useSelector ( state=>state.order.plan )
+
   return (  
      <>
     <Box style={{
@@ -31,7 +39,7 @@ export default function FolderList() {
             <PersonIcon />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary="Name" secondary=" Nguyen Van A" />
+        <ListItemText primary="Name" secondary={fullname}/>
       </ListItem>
       <ListItem>
         <ListItemAvatar>
@@ -39,7 +47,7 @@ export default function FolderList() {
             <PersonPinCircleIcon />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary="Current Address" secondary="aaa" />
+        <ListItemText primary="Current Address" secondary={currentCity} />
       </ListItem>
       
       <ListItem>
@@ -48,7 +56,7 @@ export default function FolderList() {
             <MapIcon />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary="Distance" secondary="100km" />
+        <ListItemText primary="Distance" secondary={distance} />
       </ListItem>
        
     </List>
@@ -61,7 +69,7 @@ export default function FolderList() {
             <CalendarMonthIcon />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary="Intended date for moving house" secondary="22/12/2022" />
+        <ListItemText primary="Intended date for moving house" secondary={movingDate} />
       </ListItem>
       <ListItem>
         <ListItemAvatar>
@@ -69,7 +77,7 @@ export default function FolderList() {
             <WhereToVoteIcon />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText primary="Destination" secondary="bbb" />
+        <ListItemText primary="Destination" secondary={destination}/>
       </ListItem>
         </List>
         </Grid>

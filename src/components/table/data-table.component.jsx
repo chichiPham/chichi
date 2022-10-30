@@ -19,14 +19,18 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import ProgressBa from './ProgressBa';
+import serviceCompletionApi from "../../api/servicesCompletionApi";
+import { useSelector } from 'react-redux';
 
 function createData(proposalDate, name, planB) {
+    
     return {
         proposalDate,
         name,
         planB
     };
-}
+} 
+
 // gia tri tai len tu database
 const rows = [
     createData('11/11/2022', 'Tìm nhà*', 'qwert'),
@@ -209,7 +213,16 @@ export default function EnhancedTable() {
     const [dense, setDense] = React.useState(false);
     const [rowsPerPage, setRowsPerPage] = React.useState(100);
 
+    const orderId = useSelector(state => state.order.orderId)
 
+    const getServiceCompletionData = async () =>  {
+    
+       return await serviceCompletionApi.serviceCompletion(orderId)
+       
+    }
+    
+    const data= getServiceCompletionData();
+    console.log(data);
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {

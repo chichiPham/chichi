@@ -1,5 +1,4 @@
 import React from "react";
-import { Fragment } from "react";
 import DataTable from "../../components/table/data-table.component";
 import SuggestedApartment from "../../components/modules/suggested-apartment.component";
 import SuggestedMovingService from "../../components/modules/suggested-moving-service.component";
@@ -9,10 +8,10 @@ import UserProflie from "../../components/userProfile/UserProfile";
 
 
 const Service = () => {
-    const paymentStatus = useSelector(state => state.order.paymentStatus)
-    // const isPay = false
 
-    if (paymentStatus) {
+    const paymentStatus = useSelector(state => state.order.paymentStatus)
+
+    if (paymentStatus === 1) {
 
         return (
             <>  <UserProflie />
