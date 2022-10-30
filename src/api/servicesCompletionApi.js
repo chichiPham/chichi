@@ -2,7 +2,7 @@ import Api from './Api';
 
 const url = "/services-completion";
 
-const serviceCompletion = (orderId) => {
+export const serviceCompletion = (orderId) => {
     const requestParams = {
         orderId
     }
@@ -12,5 +12,3 @@ const serviceCompletion = (orderId) => {
 
 //http://localhost:8080/api/v1/services-completion?orderId=2
 // export
-const serviceCompletionApi = { serviceCompletion }
-export default serviceCompletionApi;

@@ -9,8 +9,8 @@ import UserProflie from "../../components/userProfile/UserProfile";
 
 const Service = () => {
 
-    const paymentStatus = useSelector(state => state.order.paymentStatus)
-
+    const paymentStatus = useSelector(state=>state.order.paymentStatus)
+ 
     if (paymentStatus === 1) {
 
         return (

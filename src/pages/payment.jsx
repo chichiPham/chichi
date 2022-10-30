@@ -1,15 +1,34 @@
 import React from 'react';
 import payment from "../assets/images/background/Payment.jpg";
 import '../assets/css/payment.css'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setOrderPaymentStatus } from '../store/order/orderSlice';
 import { useNavigate } from 'react-router-dom';
-const Payment = () => {
-    const dispatch=useDispatch();
+import orderApi from '../api/OderApi';
+import storage from '../storage/storage';
 
-    const _clickPayment=()=>{
-        dispatch(setOrderPaymentStatus(1));
-        alert('Thanh toán thành công, xin cảm ơn quý khách !')
+const Payment = () => {
+    const orderId = useSelector(state => state.order.orderId)
+    const dispatch=useDispatch();
+    const navigate= useNavigate()
+    const _clickPayment=async()=>{
+        try {
+            const body={
+                paymentStatus:1
+            }
+            const response= await orderApi.payment(orderId,body)
+            if (response) {
+              
+                alert('Thanh toán thành công, xin cảm ơn quý khách !')
+                dispatch(setOrderPaymentStatus(1));
+                
+                navigate('/service')
+
+            }
+        } catch (error) {
+            alert(error)
+        }
+       
     }
     return (
         <div className='payment'>

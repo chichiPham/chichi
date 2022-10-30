@@ -23,7 +23,7 @@ const schema = Yup.object().shape({
         .email("Invalid email format"),
     password: Yup.string()
         .required("Password is a required field")
-        .min(6, "Password must be at least 8 characters"),
+        .min(6, "Password must be at least 6 characters"),
 });
 
 function SignInForm() {
@@ -73,21 +73,22 @@ function SignInForm() {
                             }));
 
                             const orderResponse = await orderApi.getOrderInfo(logInResult.id);
-                            const { id, plan, currentCity,
+                            const { id,currentCity,
                                 newCity, movingDate, isHasApartmentAlready,
                                 distance, payment_status } = orderResponse
 
-                            console.log('order id', orderResponse.id);
+                            console.log( orderResponse);
 
                             if (orderResponse) {
+
                                 //save to storage
-                                storage.setOrderInfo(id, plan, currentCity,
+                                storage.setOrderInfo(id, currentCity,
                                     newCity, movingDate, isHasApartmentAlready,
                                     distance, payment_status)
 
                                 // save to store
                                 dispatch(setOrderId(id))
-                                dispatch(setOrderPlan(plan))
+                                // dispatch(setOrderPlan(plan))
                                 dispatch(setOrderCurrentCity(currentCity))
                                 dispatch(setOrderNewCity(newCity))
                                 dispatch(setOrderMovingDate(movingDate))

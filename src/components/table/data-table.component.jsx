@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { alpha } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -19,17 +19,18 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import ProgressBa from './ProgressBa';
-import serviceCompletionApi from "../../api/servicesCompletionApi";
+import { serviceCompletion } from "../../api/servicesCompletionApi";
 import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 function createData(proposalDate, name, planB) {
-    
+
     return {
         proposalDate,
         name,
         planB
     };
-} 
+}
 
 // gia tri tai len tu database
 const rows = [
@@ -215,14 +216,22 @@ export default function EnhancedTable() {
 
     const orderId = useSelector(state => state.order.orderId)
 
-    const getServiceCompletionData = async () =>  {
-    
-       return await serviceCompletionApi.serviceCompletion(orderId)
-       
+
+    const [datas, setDatas] = useState('')
+    const getServiceCompletionData = async () => {
+        try {
+            const response = await serviceCompletion(orderId)
+            setDatas(response);
+        } catch (e) {
+            alert('error')
+        }
     }
-    
-    const data= getServiceCompletionData();
-    console.log(data);
+
+    useEffect(() => {
+        getServiceCompletionData();
+    }, []);
+    console.log("datas", datas);
+
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {

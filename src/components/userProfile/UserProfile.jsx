@@ -21,7 +21,7 @@ export default function FolderList() {
   const destination= useSelector ( state=>state.order.newCity )
   const movingDate= useSelector ( state=>state.order.movingDate )
   const distance= useSelector ( state=>state.order.distance )
-  const plan= useSelector ( state=>state.order.plan )
+
 
   return (  
      <>

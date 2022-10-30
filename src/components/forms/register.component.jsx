@@ -103,8 +103,8 @@ function RegisterForm() {
                     const { email, password, name, mobile, plan, currentAddress,
                         newAddress, moveDate, isSuggestedApartment } = values;
 
-                    const distanceResponse = await serviceApi.getDistanceBetweenTwoCities(currentAddress,newAddress)
-                    console.log('distance Response',distanceResponse);   
+                    // const distanceResponse = await serviceApi.getDistanceBetweenTwoCities(currentAddress,newAddress)
+                    // console.log('distance Response',distanceResponse);   
                        
                     let isHasApartmentAlready;
 
@@ -132,6 +132,7 @@ function RegisterForm() {
 
                         dispatch(resetPackage());
                         alert(JSON.stringify(values));
+                        navigate('/confirm')
 
                     } catch (error) {
                         alert('error')

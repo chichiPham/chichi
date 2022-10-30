@@ -62,7 +62,6 @@ const setUserInfo = (id, email, phone, fullname, role, status, avatarUrl) => {
 
 const setOrderInfo = (
     orderId,
-    plan,
     currentCity,
     newCity,
     movingDate,
@@ -71,7 +70,6 @@ const setOrderInfo = (
     paymentStatus) => {
 
     setItem("orderId", orderId);
-    setItem("plan", plan);
     setItem("currentCity", currentCity);
     setItem("newCity", newCity);
     setItem("movingDate", movingDate);
@@ -83,7 +81,7 @@ const setOrderInfo = (
 const getOrderInfoToJson = () => {
     return {
         "orderId": getItem("orderId"),
-        "plan": getItem("plan"),
+        // "plan": getItem("plan"),
         "currentCity": getItem("currentCity"),
         "newCity": getItem("newCity"),
         "movingDate": getItem("movingDate"),
@@ -95,7 +93,7 @@ const getOrderInfoToJson = () => {
 }
 const removeOrderInfo = () => {
     removeItem("orderId");
-    removeItem("plan");
+    // removeItem("plan");
     removeItem("currentCity");
     removeItem("newCity");
     removeItem("movingDate");
@@ -128,6 +126,8 @@ const removeUserInfo = () => {
 
 // export
 const storage = {
+    setItem,
+    getItem,
     setOrderInfo,
     getOrderInfoToJson,
     removeOrderInfo,

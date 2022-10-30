@@ -9,7 +9,12 @@ const getOrderInfo = (customerId) => {
 
     return Api.get(`${url}`, { params: requestParams });
 };
-
+const payment = (id,data) => {
+    const body={
+        ...data
+    }
+    return Api.put(`${url}/${id}`,body);
+};
 // export
-const orderApi = { getOrderInfo }
+const orderApi = { getOrderInfo ,payment }
 export default orderApi;

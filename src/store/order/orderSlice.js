@@ -1,15 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit'
 import storage from '../../storage/storage';
 
+const orderInfo = storage.getOrderInfoToJson();
+
+const { orderId,  currentCity, newCity, movingDate, 
+    isHasApartmentAlready, distance, paymentStatus } = orderInfo
+
 const initialState = {
-    orderId: localStorage.getItem('orderId'),
-    plan: storage.getOrderInfoToJson.plan,
-    currentCity: storage.getOrderInfoToJson.currentCity,
-    newCity: storage.getOrderInfoToJson.newCity,
-    movingDate: storage.getOrderInfoToJson.movingDate,
-    isHasApartmentAlready: storage.getOrderInfoToJson.isHasApartmentAlready,
-    distance: localStorage.getItem('distance'),
-    paymentStatus: storage.getOrderInfoToJson.paymentStatus,
+
+    orderId: orderId,
+    plan: {},
+    currentCity: currentCity,
+    newCity: newCity,
+    movingDate: movingDate,
+    isHasApartmentAlready: isHasApartmentAlready,
+    distance: distance,
+    paymentStatus: paymentStatus,
 
     // payment_details: null,
     // payment_date: null,
