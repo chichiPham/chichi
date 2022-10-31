@@ -1,12 +1,11 @@
-import React, {useEffect} from "react";
-import DataTable from "../../components/table/data-table.component";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import orderApi from "../../api/OderApi";
 import SuggestedApartment from "../../components/modules/suggested-apartment.component";
 import SuggestedMovingService from "../../components/modules/suggested-moving-service.component";
-import Payment from "../../pages/payment";
-import {useDispatch, useSelector} from "react-redux";
+import ServiceDataTable from "../../components/service-data-table/service-data-table.component";
 import UserProflie from "../../components/userProfile/UserProfile";
-import orderApi from "../../api/OderApi";
-import storage from "../../storage/storage";
+import Payment from "../../pages/payment";
 import {
     setOrderCurrentCity, setOrderDistance,
     setOrderId,
@@ -14,7 +13,6 @@ import {
     setOrderMovingDate,
     setOrderNewCity, setOrderPaymentStatus, setOrderPlan, setOrderStatus
 } from "../../store/order/orderSlice";
-import ServiceDataTable from "../../components/service-data-table/service-data-table.component";
 
 
 const Service = () => {
