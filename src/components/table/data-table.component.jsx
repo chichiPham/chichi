@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import { alpha } from '@mui/material/styles';
+import {alpha} from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -17,33 +17,11 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import FilterListIcon from '@mui/icons-material/FilterList';
-import { visuallyHidden } from '@mui/utils';
+import {visuallyHidden} from '@mui/utils';
 import ProgressBa from './ProgressBa';
-import { serviceCompletion } from "../../api/servicesCompletionApi";
-import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-
-function createData(proposalDate, name, planB) {
-
-    return {
-        proposalDate,
-        name,
-        planB
-    };
-}
-
-// gia tri tai len tu database
-const rows = [
-    createData('11/11/2022', 'Tìm nhà*', 'qwert'),
-    createData('', 'Ký hợp đồng thuê nhà*', ''),
-    createData('', 'Cắt hợp đồng nhà', ''),
-    createData('', 'Cắt hợp đồng điện, nước, ga, internet', ''),
-    createData('', 'Thông báo chuyển ra khỏi tỉnh/thành phố', ''),
-    createData('', 'Thủ tục yêu cầu chuyển đồ đến địa chỉ mới ', ''),
-    createData('', 'Thủ tục thay đổi địa chỉ', '', ''),
-    createData('', 'Thủ tục vứt những đồ không dùng nữa: ', ''),
-    createData('', 'Dọn dẹp nhà cửa, Chuyển đồ ', ''),
-];
+import {serviceCompletion} from "../../api/servicesCompletionApi";
+import {useSelector} from 'react-redux';
+import {useEffect} from 'react';
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -56,7 +34,7 @@ function descendingComparator(a, b, orderBy) {
 }
 
 function getComparator(order, orderBy) {
-    return order === 'desc'
+    return order === 'asc'
         ? (a, b) => descendingComparator(a, b, orderBy)
         : (a, b) => -descendingComparator(a, b, orderBy);
 }
@@ -74,8 +52,27 @@ function stableSort(array, comparator) {
     });
     return stabilizedThis.map((el) => el[0]);
 }
-
-const headCells = [
+const headCellsPlanA = [
+    {
+        id: 'proposalDate',
+        numeric: false,
+        disablePadding: false,
+        label: 'Proposal Date',
+    },
+    {
+        id: 'name',
+        numeric: false,
+        disablePadding: true,
+        label: 'Progress',
+    },
+    {
+        id: 'done',
+        numeric: false,
+        disablePadding: false,
+        label: 'Done',
+    },
+];
+const headCellsPlanB = [
     {
         id: 'proposalDate',
         numeric: false,
@@ -103,13 +100,49 @@ const headCells = [
 
 
 ];
+const headCellsPlanC = [
+    {
+        id: 'completedDate',
+        numeric: false,
+        disablePadding: false,
+        label: 'Completed Date',
+    },
+    {
+        id: 'name',
+        numeric: false,
+        disablePadding: true,
+        label: 'Progress',
+    },
+    {
+        id: 'done',
+        numeric: false,
+        disablePadding: false,
+        label: 'Done',
+    },
+];
 
 function EnhancedTableHead(props) {
-    const { order, orderBy, numSelected, rowCount, onRequestSort } =
+    const {order, orderBy, numSelected, rowCount, onRequestSort} =
         props;
     const createSortHandler = (property) => (event) => {
         onRequestSort(event, property);
     };
+
+    const planId = useSelector(state => state.order.plan);
+    let headCells = null;
+    switch (planId) {
+        case 1:
+            headCells = headCellsPlanA;
+            break;
+        case 2:
+            headCells = headCellsPlanB;
+            break;
+        case 3:
+            headCells = headCellsPlanC;
+            break;
+
+
+    }
 
     return (
         <TableHead>
@@ -152,13 +185,13 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTableToolbar(props) {
-    const { numSelected } = props;
+    const {numSelected} = props;
 
     return (
         <Toolbar
             sx={{
-                pl: { sm: 2 },
-                pr: { xs: 1, sm: 1 },
+                pl: {sm: 2},
+                pr: {xs: 1, sm: 1},
                 ...(numSelected > 0 && {
                     bgcolor: (theme) =>
                         alpha(theme.palette.primary.main, theme.palette.action.activatedOpacity),
@@ -167,7 +200,7 @@ function EnhancedTableToolbar(props) {
         >
             {numSelected > 0 ? (
                 <Typography
-                    sx={{ flex: '1 1 100%' }}
+                    sx={{flex: '1 1 100%'}}
                     color="inherit"
                     variant="subtitle1"
                     component="div"
@@ -176,7 +209,7 @@ function EnhancedTableToolbar(props) {
                 </Typography>
             ) : (
                 <Typography
-                    sx={{ flex: '1 1 100%' }}
+                    sx={{flex: '1 1 100%'}}
                     variant="h6"
                     id="tableTitle"
                     component="div"
@@ -188,13 +221,13 @@ function EnhancedTableToolbar(props) {
             {numSelected > 0 ? (
                 <Tooltip title="Done">
                     <IconButton>
-                        <CheckCircleIcon />
+                        <CheckCircleIcon/>
                     </IconButton>
                 </Tooltip>
             ) : (
                 <Tooltip title="Filter list">
                     <IconButton>
-                        <FilterListIcon />
+                        <FilterListIcon/>
                     </IconButton>
                 </Tooltip>
             )}
@@ -208,7 +241,7 @@ EnhancedTableToolbar.propTypes = {
 
 export default function EnhancedTable() {
     const [order, setOrder] = React.useState('asc');
-    const [orderBy, setOrderBy] = React.useState('done');
+    const [orderBy, setOrderBy] = React.useState('proposalDate');
     const [selected, setSelected] = React.useState([]);
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
@@ -217,11 +250,12 @@ export default function EnhancedTable() {
     const orderId = useSelector(state => state.order.orderId)
 
 
-    const [datas, setDatas] = useState('')
+    const [rows, setRows] = useState([])
+
     const getServiceCompletionData = async () => {
         try {
             const response = await serviceCompletion(orderId)
-            setDatas(response);
+            setRows(response);
         } catch (e) {
             alert('error')
         }
@@ -230,8 +264,7 @@ export default function EnhancedTable() {
     useEffect(() => {
         getServiceCompletionData();
     }, []);
-    console.log("datas", datas);
-
+    console.log("rows", rows);
 
     const handleSelectAllClick = (event) => {
         if (event.target.checked) {
@@ -263,28 +296,44 @@ export default function EnhancedTable() {
     };
 
 
-
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
     // Avoid a layout jump when reaching the last page with empty rows.
     const emptyRows =
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
+    const orderStatus = useSelector(state => state.order.orderStatus)
+
+    const planId = useSelector(state => state.order.plan);
+    let headCells = null;
+    switch (planId) {
+        case 1:
+            headCells = headCellsPlanA;
+            break;
+        case 2:
+            headCells = headCellsPlanB;
+            break;
+        case 3:
+            headCells = headCellsPlanC;
+            break;
+
+    }
+
     return (
         <Box style={{
             display: 'block',
             padding: 30
-        }} sx={{ width: '100%' }}>
+        }} sx={{width: '100%'}}>
 
-            <Paper sx={{ width: '100%', mb: 2 }}>
-                <EnhancedTableToolbar numSelected={selected.length} />
-                <ProgressBa />
+            <Paper sx={{width: '100%', mb: 2}}>
+                <EnhancedTableToolbar numSelected={selected.length}/>
+                <ProgressBa value={orderStatus}/>
                 <TableContainer style={{
                     display: 'block',
                     padding: 30
                 }}>
                     <Table
-                        sx={{ minWidth: 700 }}
+                        sx={{minWidth: 700}}
                         aria-labelledby="tableTitle"
                         size={dense ? 'small' : 'medium'}
                     >
@@ -292,21 +341,21 @@ export default function EnhancedTable() {
                             display: 'block',
                             padding: 30
                         }}
-                            numSelected={selected.length}
-                            order={order}
-                            orderBy={orderBy}
-                            onSelectAllClick={handleSelectAllClick}
+                                           numSelected={selected.length}
+                                           order={order}
+                                           orderBy={orderBy}
+                                           onSelectAllClick={handleSelectAllClick}
 
-                            rowCount={rows.length}
+                                           rowCount={rows.length}
                         />
 
-                        <TableBody >
+                        <TableBody>
                             {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                  rows.sort(getComparator(order, orderBy)).slice() */}
                             {stableSort(rows, getComparator(order, orderBy))
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((row, index) => {
-                                    const isItemSelected = isSelected(row.name);
+                                    const isItemSelected = isSelected(index);
                                     const labelId = `enhanced-table-checkbox-${index}`;
                                     // theo hang co duowc nhung
                                     return (
@@ -316,28 +365,50 @@ export default function EnhancedTable() {
                                             role="checkbox"
                                             aria-checked={isItemSelected}
                                             tabIndex={-1}
-                                            key={row.name}
+                                            key={index}
                                             selected={isItemSelected}
                                         >
-                                            <TableCell align="left">{row.proposalDate}
-                                            </TableCell>
-                                            <TableCell
-                                                component="th"
-                                                id={labelId}
-                                                scope="row"
-                                                padding="none"
-                                            >   {row.name}
-                                            </TableCell>
-                                            <TableCell padding="checkbox">
+                                            {
+                                                planId === 3 &&
+                                                <TableCell align="center">
+                                                    {row.completionDate}
+                                                </TableCell>
+                                            }
+
+                                            {
+                                                planId === 1 || planId === 2 &&
+                                                <TableCell align="center">
+                                                    {row.proposedDate}
+                                                </TableCell>
+                                            }
+
+                                            <TableCell align="left">{row.serviceContent}</TableCell>
+                                            {planId === 3 &&  <TableCell padding="checkbox">
                                                 <Checkbox
                                                     color="primary"
+                                                    disabled={true}
                                                     checked={isItemSelected}
                                                     inputProps={{
                                                         'aria-labelledby': labelId,
                                                     }}
                                                 />
                                             </TableCell>
-                                            <TableCell align="left">{row.planB}</TableCell>
+                                            }
+
+                                            {planId === 1 || planId === 2 &&
+                                                <TableCell padding="checkbox">
+                                                    <Checkbox
+                                                        color="primary"
+                                                        checked={isItemSelected}
+                                                        inputProps={{
+                                                            'aria-labelledby': labelId,
+                                                        }}
+                                                    />
+                                                </TableCell>
+                                            }
+
+
+                                            {planId === 2 && <TableCell align="right">{row.serviceRequired}</TableCell>}
                                         </TableRow>
                                     );
                                 })}
@@ -347,7 +418,7 @@ export default function EnhancedTable() {
                                         height: (dense ? 40 : 53) * emptyRows,
                                     }}
                                 >
-                                    <TableCell colSpan={6} />
+                                    <TableCell colSpan={6}/>
                                 </TableRow>
                             )}
                         </TableBody>

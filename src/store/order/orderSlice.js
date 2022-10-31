@@ -1,27 +1,44 @@
 import { createSlice } from '@reduxjs/toolkit'
 import storage from '../../storage/storage';
 
-const orderInfo = storage.getOrderInfoToJson();
-
-const { orderId,  currentCity, newCity, movingDate, 
-    isHasApartmentAlready, distance, paymentStatus } = orderInfo
-
+// const orderInfo = storage.getOrderInfoToJson();
+//
+// const { orderId,  currentCity, newCity, movingDate,
+//     isHasApartmentAlready, distance, paymentStatus, orderStatus } = orderInfo
 const initialState = {
 
-    orderId: orderId,
-    plan: {},
-    currentCity: currentCity,
-    newCity: newCity,
-    movingDate: movingDate,
-    isHasApartmentAlready: isHasApartmentAlready,
-    distance: distance,
-    paymentStatus: paymentStatus,
+    orderId: null,
+    plan: null,
+    currentCity: null,
+    newCity: null,
+    movingDate: null,
+    isHasApartmentAlready: false,
+    distance: null,
+    paymentStatus: false,
+    orderStatus: 0,
 
     // payment_details: null,
     // payment_date: null,
     // status: '',
     // created_date: ''
 }
+// const initialState = {
+//
+//     orderId: orderId,
+//     plan: {},
+//     currentCity: currentCity,
+//     newCity: newCity,
+//     movingDate: movingDate,
+//     isHasApartmentAlready: isHasApartmentAlready,
+//     distance: distance,
+//     paymentStatus: paymentStatus,
+//     orderStatus: orderStatus,
+//
+//     // payment_details: null,
+//     // payment_date: null,
+//     // status: '',
+//     // created_date: ''
+// }
 
 export const orderSlice = createSlice({
     name: 'orderSlice',
@@ -54,6 +71,11 @@ export const orderSlice = createSlice({
         setOrderPaymentStatus: (state, actions) => {
             // state.paymentStatus = actions.payload
             state.paymentStatus = actions.payload
+        },
+
+        setOrderStatus: (state, actions) => {
+            // state.paymentStatus = actions.payload
+            state.orderStatus = actions.payload
         }
 
     },
@@ -69,6 +91,7 @@ export const {
     setOrderMovingDate,
     setOrderDistance,
     setOrderIsHasApartmentAlready,
-    setOrderPaymentStatus
+    setOrderPaymentStatus,
+    setOrderStatus
 } = actions;
 

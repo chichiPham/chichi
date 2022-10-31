@@ -1,11 +1,10 @@
 import React from 'react'
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
-function ProgressBa() {
-  const now = 40;// gia tri tai len tu database
+function ProgressBa({value}) {
   return <div style={{ display: 'block',
   padding: 30 }}>
-<ProgressBar variant="success" now={now} label={`${now}%`} />
+<ProgressBar variant="success" now={value} label={`${value}%`} />
 </div>;
 
 

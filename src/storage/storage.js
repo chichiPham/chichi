@@ -67,7 +67,8 @@ const setOrderInfo = (
     movingDate,
     isHasApartmentAlready,
     distance,
-    paymentStatus) => {
+    paymentStatus,
+    orderStatus) => {
 
     setItem("orderId", orderId);
     setItem("currentCity", currentCity);
@@ -76,6 +77,8 @@ const setOrderInfo = (
     setItem("isHasApartmentAlready", isHasApartmentAlready);
     setItem("distance", distance);
     setItem("paymentStatus", paymentStatus);
+    setItem("orderStatus", orderStatus);
+
 
 }
 const getOrderInfoToJson = () => {
@@ -87,7 +90,9 @@ const getOrderInfoToJson = () => {
         "movingDate": getItem("movingDate"),
         "isHasApartmentAlready": getItem("isHasApartmentAlready"),
         "distance": getItem("distance"),
-        "paymentStatus": getItem("paymentStatus")
+        "paymentStatus": getItem("paymentStatus"),
+        "orderStatus": getItem("orderStatus")
+
 
     };
 }
