@@ -31,9 +31,9 @@ const schema = Yup.object().shape({
         .max(15, 'Maximum 15 characters')
         .required('Required'),
 
-    mobile: Yup.string()
-        .min(3, 'Minimum 3 characters')
-        .max(15, 'Maximum 15 characters')
+    mobile: Yup.number()
+        .typeError('The value must be a number')
+        .integer('The value must be a number')
         .required('Required'),
 
     plan: Yup.number()
@@ -69,7 +69,7 @@ function RegisterForm() {
     const navigate = useNavigate();
 
     const _onBlur = (e) => {
-        
+
     }
     return (
         <>
@@ -99,14 +99,13 @@ function RegisterForm() {
                 // }}
 
                 onSubmit={async (values) => {
-                  
+
                     const { email, password, name, mobile, plan, currentAddress,
                         newAddress, moveDate, isSuggestedApartment } = values;
 
-                    const distanceResponse = await serviceApi.getDistanceBetweenTwoCities(currentAddress,newAddress)
-                    const distance = distanceResponse.route.distance;
-                    console.log('distance Response',distance);
-                       
+                    // const distanceResponse = await serviceApi.getDistanceBetweenTwoCities(currentAddress,newAddress)
+                    // console.log('distance Response',distanceResponse);   
+
                     let isHasApartmentAlready;
 
                     isSuggestedApartment === true ?
@@ -125,7 +124,7 @@ function RegisterForm() {
                             "movingDate": moveDate,
                             "planId": plan,
                             "isHasApartmentAlready": isHasApartmentAlready,
-                            "distance": distance
+                            "distance": "100"
                         }
 
                         const registerResponse = await userApi.createUserAndOrder(data)

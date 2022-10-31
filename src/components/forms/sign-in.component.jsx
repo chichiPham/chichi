@@ -1,20 +1,13 @@
-import "../../assets/css/sign-in-form.css";
-import {Formik} from "formik";
-import * as Yup from "yup";
-import CheckboxLabels from "./CheckBoxLabels";
+import { Formik } from "formik";
 import React from "react";
-import {Checkbox, FormControlLabel} from "@mui/material";
-import storage from "../../storage/storage";
-import {useDispatch} from "react-redux";
-import {setIsRememberMe, setToken, setUserInfo} from "../../store/user/logInUserSlice";
-import {NavLink, useNavigate} from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import * as Yup from "yup";
 import LoginApi from "../../api/LoginApi";
-import orderApi from "../../api/OderApi";
-import {
-    setOrderId, setOrderCurrentCity, setOrderDistance,
-    setOrderIsHasApartmentAlready, setOrderMovingDate,
-    setOrderNewCity, setOrderPaymentStatus, setOrderPlan, setOrderStatus
-} from "../../store/order/orderSlice";
+import "../../assets/css/sign-in-form.css";
+import storage from "../../storage/storage";
+import { setIsRememberMe, setToken, setUserInfo } from "../../store/user/logInUserSlice";
+import CheckboxLabels from "./CheckBoxLabels";
 
 // Creating schema
 const schema = Yup.object().shape({
