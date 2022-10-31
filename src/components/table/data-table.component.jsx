@@ -376,7 +376,14 @@ export default function EnhancedTable() {
                                             }
 
                                             {
-                                                planId === 1 || planId === 2 &&
+                                                planId === 1 &&
+                                                <TableCell align="center">
+                                                    {row.proposedDate}
+                                                </TableCell>
+                                            }
+
+                                            {
+                                                planId === 2  &&
                                                 <TableCell align="center">
                                                     {row.proposedDate}
                                                 </TableCell>
@@ -395,7 +402,19 @@ export default function EnhancedTable() {
                                             </TableCell>
                                             }
 
-                                            {planId === 1 || planId === 2 &&
+                                            {planId === 1 &&
+                                                <TableCell padding="checkbox">
+                                                    <Checkbox
+                                                        color="primary"
+                                                        checked={isItemSelected}
+                                                        inputProps={{
+                                                            'aria-labelledby': labelId,
+                                                        }}
+                                                    />
+                                                </TableCell>
+                                            }
+
+                                            { planId === 2 &&
                                                 <TableCell padding="checkbox">
                                                     <Checkbox
                                                         color="primary"
