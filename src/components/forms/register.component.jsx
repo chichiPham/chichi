@@ -103,8 +103,9 @@ function RegisterForm() {
                     const { email, password, name, mobile, plan, currentAddress,
                         newAddress, moveDate, isSuggestedApartment } = values;
 
-                    // const distanceResponse = await serviceApi.getDistanceBetweenTwoCities(currentAddress,newAddress)
-                    // console.log('distance Response',distanceResponse);   
+                    const distanceResponse = await serviceApi.getDistanceBetweenTwoCities(currentAddress,newAddress)
+                    const distance = distanceResponse.route.distance;
+                    console.log('distance Response',distance);
                        
                     let isHasApartmentAlready;
 
@@ -124,7 +125,7 @@ function RegisterForm() {
                             "movingDate": moveDate,
                             "planId": plan,
                             "isHasApartmentAlready": isHasApartmentAlready,
-                            "distance": "100"
+                            "distance": distance
                         }
 
                         const registerResponse = await userApi.createUserAndOrder(data)
