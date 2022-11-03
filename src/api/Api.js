@@ -4,7 +4,10 @@ import storage from "../storage/storage";
 const axiosClient = axios.create({
     baseURL: `http://localhost:8080/api/v1`,
     // timeout: 5000, // default is `0` (no timeout)
-    responseType: 'json'
+    responseType: 'json',
+    headers: { 
+        'Content-Type': 'application/json'
+      }
 });
 
 axiosClient.interceptors.request.use(async (config) => {

@@ -2,8 +2,9 @@ import React from 'react';
 import PricingBox from '../pricing/PricingBox';
 import Footer from './Footer';
 import Header from './Header';
-
+import axios from 'axios';
 const HomeContainer = () => {
+
     return (
         <div>
             {/* <TopMenu /> */}

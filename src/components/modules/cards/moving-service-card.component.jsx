@@ -6,21 +6,25 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
-export default function MovingServiceCard() {
+export default function MovingServiceCard(props) {
+    const {logo,serviceName,distance,price}=props
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 345, height:"auto" }}>
             <CardMedia
                 component="img"
-                height="140"
-                image="/static/images/cards/contemplative-reptile.jpg"
+                height="100%"
+                image={logo}
                 alt="green iguana"
             />
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                    Tên dịch vụ vận chuyển
+                    {serviceName}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                    Thông tin:
+
+                    <p>Distance: {distance} Km</p>
+                    <p>Price: {price} $</p>
+
                 </Typography>
             </CardContent>
             <CardActions>

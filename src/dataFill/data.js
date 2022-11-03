@@ -101,5 +101,135 @@ const city = [
     { id: 47, name: '47	沖縄県	Okinawa', value:'Okinawa'},
 
 ]
+const yamatoMovingService  = [
+    {
+        distance:100,
+        price: 10000
+    },
+    {
+        distance:200,
+        price: 20000
+    },
+    {
+        distance:300,
+        price: 30000
+    },
+    {
+        distance:400,
+        price: 40000
+    },
+    {
+        distance:500,
+        price: 50000
+    },
+    {
+        distance:600,
+        price: 60000
+    },
+    {
+        distance:700,
+        price: 70000
+    },
+    {
+        distance:800,
+        price: 80000
+    },
+    {
+        distance:900,
+        price: 80000
+    },
+    {
+        distance:1000,
+        price: 100000
+    },
 
-export { city, plan,pricingServiceData }
+]
+const sagawaMovingService  = [
+    {
+        distance:100,
+        price: 9000
+    },
+    {
+        distance:200,
+        price: 18000
+    },
+    {
+        distance:300,
+        price: 27000
+    },
+    {
+        distance:400,
+        price: 36000
+    },
+    {
+        distance:500,
+        price: 45000
+    },
+    {
+        distance:600,
+        price: 54000
+    },
+    {
+        distance:700,
+        price: 63000
+    },
+    {
+        distance:800,
+        price: 72000
+    },
+    {
+        distance:900,
+        price: 81000
+    },
+    {
+        distance:1000,
+        price: 90000
+    },
+
+]
+
+
+const japanPostMovingService  = [
+    {
+        distance:100,
+        price: 11000
+    },
+    {
+        distance:200,
+        price: 22000
+    },
+    {
+        distance:300,
+        price: 33000
+    },
+    {
+        distance:400,
+        price: 44000
+    },
+    {
+        distance:500,
+        price: 55000
+    },
+    {
+        distance:600,
+        price: 66000
+    },
+    {
+        distance:700,
+        price: 77000
+    },
+    {
+        distance:800,
+        price: 88000
+    },
+    {
+        distance:900,
+        price: 99000
+    },
+    {
+        distance:1000,
+        price: 110000
+    },
+   
+]
+export { city, plan,pricingServiceData ,yamatoMovingService,japanPostMovingService,sagawaMovingService}
