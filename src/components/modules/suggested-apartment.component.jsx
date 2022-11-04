@@ -10,16 +10,21 @@ const SuggestedApartment = () => {
     const [apartmentData, setApartmentData]=useState('')
     const getApartmentData = async ()=>{
         try {
-            const response = await getApartmentDataByCityCode(13)
+            // area code: 13   đang error
+            const areaCode=13
+            // city code: 13102   đang error
+            const cityCode=13102
+            const response = await getApartmentDataByCityCode(cityCode)
             console.log( 'data13',response.data );   
             setApartmentData(response.data) 
         } catch (error) {
             alert(error)
         }
     }
-    // useEffect(()=>{
-    //     getApartmentData()
-    // },[])
+    useEffect(()=>{
+        getApartmentData()
+    },[])
+
     console.log({apartmentData});
     return (
         <Fragment>
